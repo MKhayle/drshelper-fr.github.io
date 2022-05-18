@@ -1,0 +1,164 @@
+:root {
+	--black: #273043;
+}
+
+html {
+	font-size: 16px;
+}
+
+body {
+	background-color: antiquewhite;
+	color: var(--black);
+	font-family: Helvetica, Arial, sans-serif;
+	line-height: 1.3rem;
+}
+
+b { font-weight: 700; }
+i { font-style: italic; }
+
+h1 {
+	border-bottom: 1px solid var(--black);
+	font-size: 0.833rem;
+	font-weight: 700;
+	line-height: 1.1em;
+	margin-bottom: 1rem;
+	padding: 0.25rem;
+	/* 	padding: 0.25rem 1rem 0.5rem 0.5rem; */
+	width: fit-content;
+}
+
+button {
+	background-color: oldlace;
+	border: 2px solid var(--black);
+	border-radius: 3rem;
+	box-sizing: border-box;
+	color: var(--black);
+	font-size: 0.833rem;
+	padding: 0.5rem 1rem;
+	width: 100%;
+	height: 100%;
+}
+button:hover {
+	background-color: #f3dfcd;
+}
+
+.grid {
+	display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 100vw auto;
+}
+.arena {
+	grid-area: 1 / 1 / 2 / 2;
+	background-color: darkseagreen;
+}
+.menu {
+	grid-area: 2 / 1 / 3 / 2;
+	background-color: oldlace;
+	padding: 0.5rem;
+}
+
+.debuffs {
+	display: grid;
+	grid-template-columns: 15% 15% 15% 55%;
+  grid-template-rows: repeat(2, fit-content);
+  grid-template-areas:
+    "intemp hotcold brand life"
+    "txt-hotcold . txt-brand life";
+	margin-bottom: 1rem;
+}
+.intemp { grid-area: intemp; }
+.hotcold { grid-area: hotcold; }
+.brand { grid-area: brand; }
+.life { grid-area: life; }
+#txt-hotcold { grid-area: txt-hotcold; margin: auto; }
+#txt-brand { grid-area: txt-brand; margin: auto; }
+
+@media only screen and (max-width: 768px) {
+	img, .life svg {
+		display: block;
+		margin: auto;
+		width: 85%;
+		height: 85%;
+	}
+}
+
+#status {
+	border: 1px dotted var(--black);
+	border-radius: 3px;
+	padding: 1rem;
+	height: max-content;
+}
+
+.buttons {
+	display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 1fr;
+	box-sizing: border-box;
+	margin: 1rem 0;
+}
+.left {
+	grid-area: 1 / 1 / 2 / 2;
+	padding: 1% 2%;
+}
+.right {
+	grid-area: 1 / 2 / 2 / 3;
+	padding: 1% 2%;
+}
+
+.invisible { visibility: hidden; }
+.hidden { display: none; }
+
+footer {
+	border-top: 2px double var(--black);
+	font-size: 0.833rem;
+	padding: 0.5rem 1rem 1rem;
+	text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+	html {
+		font-size: 18px;
+	}
+	
+	body {
+		line-height: 1.5rem;
+	}
+
+	h1 {
+		border-width: 2px;
+		font-size: 1rem;
+		line-height: 1.2em;
+		margin-bottom: 1rem;
+		padding: 0.25rem 1rem 0.5rem 0.5rem;
+	}
+
+	button {
+		font-size: 1rem;
+	}
+
+	.grid {
+		grid-template-columns: 65% 35%;
+		grid-template-rows: 100vh;
+	}
+	.arena {
+		grid-area: 1 / 1 / 2 / 2;
+	}
+	.menu {
+		grid-area: 1 / 2 / 2 / 3;
+		padding: 3rem 3rem 3rem 2rem;
+	}
+
+	.debuffs {
+		grid-template-rows: 4.5rem 2rem;
+	}
+
+	#status {
+		border-width: 2px;
+		padding: 1.5rem 1.5rem 2rem;
+		height: max-content;
+	}
+	
+	.buttons {
+		margin-top: 2rem;
+	}
+}
