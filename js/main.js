@@ -178,7 +178,7 @@ class Arena {
             clr = (hit === 2) ? 'sandybrown' : '#fad2b0';
           }
         }
-        d3.select('#tile' + i + j).style('fill', clr);
+        d3.select('#bg' + i + j).style('fill', clr);
       }
     }
 
