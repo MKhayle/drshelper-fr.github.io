@@ -207,7 +207,7 @@ class Arena {
       case 's':
       default: deg = 0;
     }
-    d3.select('#face' + pos).attr('transform', 'translate(8, 8) rotate(' + deg + ') translate(-8, -8)');   
+    d3.select('#face' + pos).attr('transform', 'translate(17, 17) rotate(' + deg + ') translate(-17, -17)');   
   }
 
   meters(phase) {
