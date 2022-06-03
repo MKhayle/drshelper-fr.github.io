@@ -6,27 +6,42 @@
 }
 
 html {
-	font-size: 16px;
+	font-size: 100%;
 }
 
 body {
 	background-color: antiquewhite;
 	color: black;
 	font-family: 'Public Sans', Helvetica, Arial, sans-serif;
-	line-height: 1.3rem;
+	font-size: 1rem;
+	line-height: 1.4rem;
 }
 
-b { font-weight: 700; }
-i { font-style: italic; }
+b {
+	font-weight: 700;
+}
+
+i {
+	font-style: italic;
+}
+
+h1, h2 {
+	font-weight: 700;
+}
 
 h1 {
-	border-bottom: 1px solid black;
-	font-size: var(--sm);
-	font-weight: 700;
+	border-bottom: 2px solid black;
+	font-size: 1rem;
 	line-height: 1.1em;
 	margin-bottom: 1rem;
 	padding: 0.25rem;
 	width: fit-content;
+}
+@media only screen and (min-width: 768px) {
+	h1 {
+		padding: 0.5rem;
+		/*padding: 0.25rem 1rem 0.5rem 0.5rem;*/
+	}
 }
 
 button {
@@ -35,7 +50,7 @@ button {
 	border-radius: 3rem;
 	box-sizing: border-box;
 	color: black;
-	font-size: var(--sm);
+	font-size: 1rem;
 	padding: 0.5rem 1rem;
 	width: 100%;
 	height: 100%;
@@ -58,6 +73,23 @@ button:hover {
 	background-color: floralwhite;
 	padding: 0.5rem;
 }
+@media only screen and (min-width: 768px) {
+	.grid {
+		grid-template-columns: 65% 35%;
+		grid-template-rows: 100%;
+		height: clamp(25rem, 100vh, 1000px);
+	}
+	.arena {
+		grid-area: 1 / 1 / 2 / 2;
+	}
+	.menu {
+		grid-area: 1 / 2 / 2 / 3;
+		padding: 3rem 3rem 3rem 2rem;
+	}
+}
+
+
+
 
 .debuffs {
 	display: grid;
@@ -119,38 +151,6 @@ footer {
 }
 
 @media only screen and (min-width: 768px) {
-	html {
-		font-size: 18px;
-	}
-	
-	body {
-		line-height: 1.5rem;
-	}
-
-	h1 {
-		border-width: 2px;
-		font-size: 1rem;
-		line-height: 1.2em;
-		margin-bottom: 1rem;
-		padding: 0.25rem 1rem 0.5rem 0.5rem;
-	}
-
-	button {
-		font-size: 1rem;
-	}
-
-	.grid {
-		grid-template-columns: 65% 35%;
-		grid-template-rows: 100vh;
-	}
-	.arena {
-		grid-area: 1 / 1 / 2 / 2;
-	}
-	.menu {
-		grid-area: 1 / 2 / 2 / 3;
-		padding: 3rem 3rem 3rem 2rem;
-	}
-
 	.debuffs {
 		grid-template-rows: 4.5rem 2rem;
 	}
