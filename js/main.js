@@ -1,15 +1,30 @@
 'use strict';
-<<<<<<< HEAD
-var VIVI, ARENA, SPEED, timerHOTCOLD, timerBRAND, timerDEBUFF;
-=======
-var VIVI, ARENA, timerHOTCOLD, timerBRAND, timerDEBUFF, hasPICKED = false;
+var VIVI, ARENA, timerHOTCOLD, timerBRAND, timerDEBUFF;
 var SPEED = 1000;
->>>>>>> parent of 9267662 (Minor code cleanup)
 const VIVIS = ['vivi-win', 'vivi-dead'];
-const BOSSES = ['bosse', 'bossn', 'bossw', 'bosss'];
+const VIVIS2 = ['vivi-ans', 'vivi-win', 'vivi-dead', 'vivi-south'];
+const TA = ['bosse'];
 const CLONES = ['bossn', 'bossw', 'bosss'];
+const BOSSES = TA.concat(CLONES);
 const METERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
 const SWORDS = ['swordn', 'sworde', 'swordw', 'swords'];
+const STATUS = {
+  win: 'You resolved everything correctly and lived! Great job!',
+  dead: 'You failed to neutralize your temperature and got KO’d&nbsp;:(',
+  sword: 'You got hit by two swords at once!',
+  burned: 'Your body went above 2 levels and burned to death!',
+  froze: 'Your body went below 2 levels and froze to death!'
+};
+
+const SETTINGS = {
+  timer: true,
+  safe: true,
+  init: function() {
+    this.timer = d3.select('#formTimer').property('checked');
+    this.safe = d3.select('#formSafe').property('checked');
+    SPEED = this.timer ? 1000 : 1000;
+  }
+};
 
 class Vivi {
   constructor(hotcold, brand) {
@@ -43,7 +58,7 @@ class Vivi {
     if (hits[y][x] > 1) {
       endPractice();
       this.dead();
-      write('You got hit by two swords at once!');
+      updateStatus('You got hit by two swords at once!');
     } else {
       this.check(temps[y][x]);
     }
@@ -55,9 +70,9 @@ class Vivi {
       endPractice();
       this.dead();
       if (body > 2) {
-        write('Your body went above 2 levels and burned to death!');
+        updateStatus('Your body went above 2 levels and burned to death!');
       } else {
-        write('Your body went below 2 levels and froze to death!');
+        updateStatus('Your body went below 2 levels and froze to death!');
       }
     } else {
       this.life(body);
@@ -81,7 +96,7 @@ class Arena {
     this.safe2 = safe2;
     this.meters1 = meters1;
     this.meters2 = meters2;
-    this.showSafe = isChecked('formShowSafe');
+    this.showSafe = SETTINGS.safe;
     this.init();
     this.rotateAll(0);
   }
@@ -260,12 +275,11 @@ class Arena {
   }
 }
 
-function setPractice() {
-  let hotcold, brand = 0, safe1, safe2, meters1, meters2, isSame;
+function setGame() {
+  let hotcold, brand, safe1, safe2, meters1, meters2, isSame;
   const TEMPS = [-2, -1, 1, 2];
   const SAFES = [1, 2, 3, 4];
-
-  function shuffle(array) {
+  const shuffle = array => {
     let arr = array.slice();
     for (let i = arr.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -275,11 +289,9 @@ function setPractice() {
   }
 
   hotcold = getRand(...TEMPS);
-  if (isChecked('formGetBrand')) {
+  brand = getRand(...TEMPS);
+  while (hotcold + brand === 0)
     brand = getRand(...TEMPS);
-    while (hotcold + brand === 0)
-      brand = getRand(...TEMPS);  
-  }
 
   safe1 = getRand(...SAFES);
   safe2 = getRand(...SAFES);
@@ -310,14 +322,14 @@ function setPractice() {
   }
 }
 
-function startPractice() {  
-  setPractice();
+function startPractice() {
+  SETTINGS.init();
+  setGame();
   hide('settings');
   show('info');
   addOptions();
   vis('bosse');
-  if (isChecked('formUseTimer')) {
-    SPEED = 1000;
+  if (SETTINGS.timer) {
     castDebuff('Hot and Cold');
   } else {
     show('btnResolveSwords1');
@@ -332,13 +344,8 @@ function startPractice() {
   }
 }
 
-<<<<<<< HEAD
-function resolveSwords1() {
-  updateStatus();
-=======
 function btnResolveSwords1() {
-  write();
->>>>>>> parent of 9267662 (Minor code cleanup)
+  updateStatus();
   ARENA.color(1);
   setTimeout(function() {
     hide('btnResolveSwords1');
@@ -354,13 +361,8 @@ function btnResolveSwords1() {
   }, SPEED);
 }
 
-<<<<<<< HEAD
-function resolveSwords2() {
-  updateStatus();
-=======
 function btnResolveSwords2() {
-  write();
->>>>>>> parent of 9267662 (Minor code cleanup)
+  updateStatus();
   ARENA.color(2);
   setTimeout(function() {
     hide('btnResolveSwords2');
@@ -375,7 +377,7 @@ function btnResolveSwords2() {
   }, SPEED);
 }
 
-function resolveBrand() {
+function btnResolveBrand() {
   let brand = VIVI.brand;
   hide('btnResolveBrand');
   show('btnPractiseAgain');
@@ -385,20 +387,16 @@ function resolveBrand() {
   hide('dbf-eb' + brand);
   if (VIVI.body === 0) {
     VIVI.win();
-    write('You resolved everything correctly and lived! Great job!');
+    updateStatus('You resolved everything correctly and lived! Great job!');
   } else {
     VIVI.dead();
-    write('You failed to neutralize your temperature and got KO’d&nbsp;:(');
+    updateStatus('You failed to neutralize your temperature and got KO’d&nbsp;:(');
   }
 }
 
 function startTimerHotCold() {
   let text = d3.select('#txt-hotcold');
-<<<<<<< HEAD
-  let time = (VIVI.brand === 0) ? 42 : 49;
-=======
-  let time = 49;
->>>>>>> parent of 9267662 (Minor code cleanup)
+  let time = 49; // 42 w/o brand
 
   text.text(time);
   show('dbf-intemp');
@@ -413,10 +411,10 @@ function startTimerHotCold() {
         text.html('&nbsp;');
         if (VIVI.body === 0) {
           VIVI.win();
-          write('You resolved everything correctly and lived! Great job!');
+          updateStatus('You resolved everything correctly and lived! Great job!');
         } else {
           VIVI.dead();
-          write('You failed to neutralize your temperature and got KO’d :(');
+          updateStatus('You failed to neutralize your temperature and got KO’d :(');
         }
         break;
       case 7:
@@ -436,16 +434,6 @@ function startTimerHotCold() {
         break;
       case 20:
         VIVI.sword(1);
-        /*
-        if (hasPICKED) {
-          VIVI.sword(1);
-        } else {
-          VIVI.show();
-          VIVI.dead();
-          endPractice();
-          write('Please select a tile next time and try again.');
-        }
-        */
         break;
       case 21:
         ARENA.color(1);
@@ -495,7 +483,7 @@ function startTimerBrand() {
 }
 
 function castDebuff(mechanic, time = 4) {
-  write('Casting <b>' + mechanic + '</b> in... ' + time);
+  updateStatus('Casting <b>' + mechanic + '</b> in... ' + time);
 
   timerDEBUFF = setInterval(function() {
     time--;
@@ -506,11 +494,11 @@ function castDebuff(mechanic, time = 4) {
           break;
         case 'Unwavering Apparition':
           ARENA.clones();
-          write();
+          updateStatus();
           break;
         case 'Elemental Brand':
           startTimerBrand();
-          write();
+          updateStatus();
           break;
         case 'Hot and Cold':
           startTimerHotCold();
@@ -519,7 +507,7 @@ function castDebuff(mechanic, time = 4) {
       }
       clearInterval(timerDEBUFF);
     } else {
-      write('Casting <b>' + mechanic + '</b> in... ' + time);
+      updateStatus('Casting <b>' + mechanic + '</b> in... ' + time);
     }
   }, SPEED);
 }
@@ -537,7 +525,6 @@ function clickTile() {
   VIVI.pos = this.id;
   VIVI.move(VIVI.x * 40 + 18, VIVI.y * 40 + 16);
   VIVI.show();
-  hasPICKED = true;
 }
 
 function endPractice() {
@@ -560,11 +547,9 @@ function practiseAgain() {
 function resetGlobals() {
   VIVI = '';
   ARENA = '';
-  SPEED = 0;
   timerHOTCOLD = '';
   timerBRAND = '';
   timerDEBUFF = '';
-  hasPICKED = false;
 }
 
 function resetThis(...args) {
@@ -580,27 +565,28 @@ function getRand(...args) {
 	return args[Math.floor(Math.random() * args.length)];
 }
 
-function isChecked(form) {
-  return d3.select('#' + form).property('checked');
-}
-
 function move(elem, x, y) { d3.select('#' + elem).attr('transform', 'translate(' + x + ', ' + y + ')'); }
 function invis(elem) { d3.select('#' + elem).classed("invisible", true); }
 function vis(elem) { d3.select('#' + elem).classed("invisible", false); }
 function hide(elem) { d3.select('#' + elem).classed("hidden", true); }
 function show(elem) { d3.select('#' + elem).classed("hidden", false); }
-function write(status = '&nbsp;') { d3.select('#status').html(status); }
+
+function updateStatus(status = '&nbsp;') { write('status', status); }
+function write(elem, text) {
+  d3.select('#' + elem).html(text);
+}
+
 function levelTemp(temp) {
 	let level;
 	switch(temp) {
-		case 0: write(); return;
+		case 0: updateStatus(); return;
 		case -2: level = 'falls 2 levels.'; break;
 		case -1: level = 'falls 1 level.'; break;
 		case 1: level = 'rises 1 level.'; break;
 		case 2:
 		default: level = 'rises 2 levels.';
 	}
-	write('<i>Your body temperature ' + level + '</i>');
+	updateStatus('<i>Your body temperature ' + level + '</i>');
 }
 
 function resetBoard() {

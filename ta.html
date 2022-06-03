@@ -31,27 +31,26 @@
 	<body>
 		<div class="grid">
 			<div class="menu">
-				<h1>DRS TA Swords Practice</h1>
-				
 				<div id="settings">
-					<p>Simulator to practise Trinity Avowed’s Swords phase in FFXIV’s Delubrum Reginae (Savage).</p>
 					<h2>Settings</h2>
-					<input type="checkbox" id="formUseTimer" name="formUseTimer" checked>
-					<label for="formUseTimer">Practise with a timer</label>
+					<input type="checkbox" id="formTimer" name="formTimer" checked>
+					<label for="formTimer">Practise with a timer</label>
 					<br>
 
-					<input type="checkbox" id="formShowSafe" name="formShowSafe" checked>
-					<label for="formShowSafe">Show the safe spot</label>
+					<input type="checkbox" id="formSafe" name="formSafe" checked>
+					<label for="formSafe">Show the safe spot</label>
 					<br>
 
-					<input type="checkbox" id="formGetBrand" name="formGetBrand" checked>
-					<label for="formGetBrand">Get an <b>Elemental Brand</b> debuff</label>
+					<input type="checkbox" id="formBrand" name="formBrand" checked>
+					<label for="formBrand">Get an <b>Elemental Brand</b> debuff</label>
 					<br>
 
 					<button id="btnStartPractice" class="primary" onclick="startPractice()">Start Practice</button>
 				</div>
 
 				<div id="info" class="hidden">
+					<h1>DRS TA Swords Practice</h1>
+
 					<div class="debuffs">
 						<div class="intemp">
 							<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
@@ -70,6 +69,7 @@
 							<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
 						</div>
 						<div class="life">
+							<?xml version="1.0" encoding="UTF-8"?>
 							<svg width="100%" height="100%" viewBox="0 0 24 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 									<g id="ta-life" class="invisible" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 											<g id="life2" class="hidden" transform="translate(1.000000, 1.000000)">
@@ -131,9 +131,9 @@
 							<button id="btnChangeSettings" class="secondary hidden" onclick="location.reload()">Change Settings</button>
 						</div>
 						<div class="right">
-							<button id="btnResolveSwords1" class="secondary hidden" onclick="resolveSwords1()">Resolve Swords #1</button>
-							<button id="btnResolveSwords2" class="secondary hidden" onclick="resolveSwords2()">Resolve Swords #2</button>
-							<button id="btnResolveBrand" class="secondary hidden" onclick="resolveBrand()">Resolve Brand</button>
+							<button id="btnResolveSwords1" class="secondary hidden" onclick="btnResolveSwords1()">Resolve Swords #1</button>
+							<button id="btnResolveSwords2" class="secondary hidden" onclick="btnResolveSwords2()">Resolve Swords #2</button>
+							<button id="btnResolveBrand" class="secondary hidden" onclick="btnResolveBrand()">Resolve Elemental Brand</button>
 							<button id="btnPractiseAgain" class="hidden" onclick="location.reload()">Practise Again</button>
 						</div>
 					</div>
@@ -141,6 +141,8 @@
 			</div>
 
 			<div class="arena">
+				<!--SVG here-->
+				<?xml version="1.0" encoding="UTF-8"?>
 				<svg width="100%" height="100%" viewBox="0 0 176 176" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<defs>
 								<filter x="-3.7%" y="-3.7%" width="107.4%" height="107.4%" filterUnits="objectBoundingBox" id="filter-1">
