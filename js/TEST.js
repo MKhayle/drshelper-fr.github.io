@@ -142,12 +142,6 @@ class Arena {
       }
       d3.select('#face' + bosses[i]).attr('transform', 'translate(17, 17) rotate(' + deg + ') translate(-17, -17)');   
     }
-    
-    if (sessionStorage.getItem('formMarkSafe')) {
-      setTimeout(function() {
-        show('tilesafe' + safe);
-      }, 0.6 * SPEED);
-    }
   }
 
   meters(phase) {
@@ -209,6 +203,8 @@ class Arena {
   showSwords(phase) {
     this.meters(phase);
     this.swords(phase);
+    if (sessionStorage.getItem('formMarkSafe'))
+      show('tilesafe' + this['safe' + phase]);
   }
 
   hideSwords() {
