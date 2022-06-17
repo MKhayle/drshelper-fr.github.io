@@ -29,117 +29,112 @@
 		<title>Trinity Avowed (Savage) Swords Practice</title>
 	</head>
 	<body>
-		<div class="grid">
+		<main>
 			<div class="menu">
-				<h1>DRS TA Swords Practice</h1>
+				<div class="top">
+					<div id="settings" class="hidden">
+						<h1>DRS TA Swords Practice</h1>
 
-				<div id="settings" class="hidden">
-					<p>Simulator to practise Trinity Avowed’s Swords phase in <i>Final Fantasy XIV’s</i> Delubrum Reginae (Savage) raid.</p>
-					<h2>Settings</h2>
-					<!--
-					<input type="checkbox" id="formUseTimer" name="formUseTimer" checked>
-					<label for="formUseTimer">Practise with a timer</label>
-					<br>
-					-->
-					<input type="checkbox" id="formMarkSafe" name="formMarkSafe" checked>
-					<label for="formMarkSafe">Mark safe spot</label>
-					<br>
+						<p>Simulator to practise Trinity Avowed’s Swords phase in <i>Final Fantasy XIV’s</i> Delubrum Reginae (Savage) raid.</p>
+						<h2>Settings</h2>
+						<input type="checkbox" id="formUseTimer" name="formUseTimer" checked>
+						<label for="formUseTimer">Practise with a timer</label>
+						<br>
+						
+						<input type="checkbox" id="formMarkSafe" name="formMarkSafe" checked>
+						<label for="formMarkSafe">Mark the safe spot</label>
+						<br>
 
-					<input type="checkbox" id="formGetBrand" name="formGetBrand" checked>
-					<label for="formGetBrand">Get <b>Elemental Brand</b> debuff</label>
-					<br>
-
-					<!--
-					<input type="checkbox" id="formSkipCast" name="formSkipCast">
-					<label for="formSkipCast">Skip debuff casting</label>
-					<br>
-					<p class="footnote">Debuffs will be applied immediately and practice session will begin during <b>Unwavering Apparition.</b></p>
-					-->
-					<button id="btnStartPractice" class="primary" onclick="setSettings()">Start Practice</button>
-				</div>
-
-				<div id="info" class="hidden">
-					<div class="debuffs">
-						<div class="intemp">
-							<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
-						</div>
-						<div class="hotcold">
-							<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Normal" title="Normal&#010;&#010;Maintaining an average body temperature." width="100%">
-							<img id="dbf-hc-2" class="hidden" src="img/cold2.png" alt="Running Cold: -2" title="Running Cold: -2&#010;&#010;Body temperature has dropped to 1 level below normal." width="100%">
-							<img id="dbf-hc-1" class="hidden" src="img/cold1.png" alt="Running Cold: -1" title="Running Cold: -1&#010;&#010;Body temperature has dropped to 2 levels below normal." width="100%">
-							<img id="dbf-hc1" class="hidden" src="img/hot1.png" alt="Running Hot: +1" title="Running Hot: +1&#010;&#010;Body temperature has risen to 1 level above normal." width="100%">
-							<img id="dbf-hc2" class="hidden" src="img/hot2.png" alt="Running Hot: +2" title="Running Hot: +2&#010;&#010;Body temperature has risen to 2 levels above normal." width="100%">
-						</div>
-						<div class="brand">
-							<img id="dbf-eb-2" class="hidden" src="img/ice2.png" alt="Cold Brand: -2" title="Cold Brand: -2&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 1 level when this effect expires." width="100%">
-							<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Cold Brand: -1" title="Cold Brand: -1&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 2 levels when this effect expires." width="100%">
-							<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Hot Brand: +1&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 1 level when this effect expires." width="100%">
-							<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
-						</div>
-						<div class="life">
-							<svg width="100%" height="100%" viewBox="0 0 24 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-									<g id="ta-life" class="hidden" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<g id="life2" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#F08080" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#F08080"></path>
-													<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-													<line x1="19.5" y1="3.5" x2="19.5" y2="4.5" id="Line-3-Copy-3" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-											</g>
-											<g id="life1" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
-													<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
-											</g>
-											<g id="life-1" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
-													<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
-											</g>
-											<g id="life-2" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#87CEFA"></path>
-													<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-													<line x1="2.5" y1="6.5" x2="2.5" y2="7.5" id="Line-3-Copy-5" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-											</g>
-											<g id="life0" class="hidden" transform="translate(1.000000, 1.000000)" fill="#A9ACB4">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle"></path>
-											</g>
-									</g>
-							</svg>
-						</div>
-						<p id="txt-hotcold"></p>
-						<p id="txt-brand"></p>
+						<input type="checkbox" id="formGetBrand" name="formGetBrand" checked>
+						<label for="formGetBrand">Get an <b>Elemental Brand</b> debuff</label>
+						<br>
 					</div>
-					<p id="status"></p>
+
+					<div id="info" class="hidden">
+						<div class="debuffs">
+							<div class="intemp">
+								<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
+							</div>
+							<div class="hotcold">
+								<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Normal" title="Normal&#010;&#010;Maintaining an average body temperature." width="100%">
+								<img id="dbf-hc-2" class="hidden" src="img/cold2.png" alt="Running Cold: -2" title="Running Cold: -2&#010;&#010;Body temperature has dropped to 1 level below normal." width="100%">
+								<img id="dbf-hc-1" class="hidden" src="img/cold1.png" alt="Running Cold: -1" title="Running Cold: -1&#010;&#010;Body temperature has dropped to 2 levels below normal." width="100%">
+								<img id="dbf-hc1" class="hidden" src="img/hot1.png" alt="Running Hot: +1" title="Running Hot: +1&#010;&#010;Body temperature has risen to 1 level above normal." width="100%">
+								<img id="dbf-hc2" class="hidden" src="img/hot2.png" alt="Running Hot: +2" title="Running Hot: +2&#010;&#010;Body temperature has risen to 2 levels above normal." width="100%">
+							</div>
+							<div class="brand">
+								<img id="dbf-eb-2" class="hidden" src="img/ice2.png" alt="Cold Brand: -2" title="Cold Brand: -2&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 1 level when this effect expires." width="100%">
+								<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Cold Brand: -1" title="Cold Brand: -1&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 2 levels when this effect expires." width="100%">
+								<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Hot Brand: +1&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 1 level when this effect expires." width="100%">
+								<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
+							</div>
+							<div class="life">
+								<svg width="100%" height="100%" viewBox="0 0 24 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										<g id="ta-life" class="hidden" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<g id="life2" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#F08080" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#F08080"></path>
+														<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+														<line x1="19.5" y1="3.5" x2="19.5" y2="4.5" id="Line-3-Copy-3" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+												</g>
+												<g id="life1" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
+														<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
+												</g>
+												<g id="life-1" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
+														<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
+												</g>
+												<g id="life-2" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#87CEFA"></path>
+														<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+														<line x1="2.5" y1="6.5" x2="2.5" y2="7.5" id="Line-3-Copy-5" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+												</g>
+												<g id="life0" class="hidden" transform="translate(1.000000, 1.000000)" fill="#A9ACB4">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle"></path>
+												</g>
+										</g>
+								</svg>
+							</div>
+							<p id="txt-hotcold"></p>
+							<p id="txt-brand"></p>
+						</div>
+
+						<p id="status"></p>
+					</div>
 				</div>
 
-				<div class="buttons">
+				<div class="bottom">
+					<button id="btnStartPractice" class="primary" onclick="setSettings()">Start Practice</button>
 					<button id="btnResolveSwords1" class="hidden" onclick="resolveSwords1()">Resolve Swords #1</button>
 					<button id="btnResolveSwords2" class="hidden" onclick="resolveSwords2()">Resolve Swords #2</button>
 					<button id="btnResolveBrand" class="hidden" onclick="resolveBrand()">Resolve Brand</button>
-					<button id="btnPractiseAgain" class="primary hidden" onclick="practiseAgain()">Practise Again</button>
-					<button id="btnEditSettings" class="hidden" onclick="editSettings()">Edit Settings</button>
+					<button id="btnPractiseAgain" class="secondary hidden" onclick="practiseAgain()">Reset Practice</button>
+					<button id="btnEditSettings" class="tertiary hidden" onclick="editSettings()">Change Settings</button>
 				</div>
 			</div>
 
@@ -416,7 +411,8 @@
 						</g>
 				</svg>
 			</div>
-		</div>
+		</main>
+
 		<footer><p>Made by Regen Aloy [Zalera] 2022 &copy; SQUARE ENIX CO., LTD. All Rights Reserved. | <a href="https://forms.gle/5T6Uut7EgeR9JiL36">Send feedback</a></p></footer>
 		<script src="js/TEST.js"></script>
 	</body>

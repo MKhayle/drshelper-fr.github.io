@@ -1,20 +1,18 @@
 'use strict';
 var VIVI, ARENA, SPEED, timerHOTCOLD, timerBRAND, timerMECHANIC;
-const VIVIS = ['vivi-win', 'vivi-dead'];
-const BOSSES = ['bosse', 'bossn', 'bossw', 'bosss'];
 const METERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
 const SWORDS = ['swordn', 'sworde', 'swordw', 'swords'];
 
-class Player {
+class Vivi {
   constructor(hotcold, brand) {
     this.hotcold = hotcold;
     this.brand = brand;
-    this.body = hotcold;
+    this.bodyTemp = hotcold;
 
-    this.pos = 'tile12';
+    this.position = 'tile12';
   }
 
-  set pos(tile) {
+  set position(tile) {
     this.tile = tile;
     this.x = parseInt(tile.slice(4, 5));
     this.y = parseInt(tile.slice(5));
@@ -23,14 +21,12 @@ class Player {
   win() {
     hide('vivi-south');
     show('vivi-win');
-    endPractice();
     updateStatus('You resolved everything correctly and lived! Great job!');
   }
 
   dead(message = 'You failed to neutralize your temperature and got KO’d&nbsp;:(') {
     hide('vivi-south');
     show('vivi-dead');
-    endPractice();
     removeOptions();
     clearInterval(timerHOTCOLD);
     write('txt-hotcold');
@@ -41,38 +37,36 @@ class Player {
   }
 
   sword(phase) {
-    let hits, temps, x = this.x, y = this.y;
-    if (phase === 1) {
-      hits = ARENA.hits1;
-      temps = ARENA.temps1;
-    } else {
-      hits = ARENA.hits2;
-      temps = ARENA.temps2;
-    }
+    let x = this.x,
+        y = this.y;
 
-    if (hits[y][x] > 1) 
+    if (ARENA['hits' + phase][y][x] > 1) {
       this.dead('You got hit by two swords at once!');
-    else 
-      this.check(temps[y][x]);
+      this.bodyTemp = 100;
+    }
+    else
+      this.check(ARENA['temps' + phase][y][x]);
   }
 
   check(temp) {
-    let newBody = this.body + temp;
+    let newBody = this.bodyTemp + temp;
 
     if (newBody > 2 || newBody < -2) {
+      this.bodyTemp = newBody;
       if (newBody > 2)
         this.dead('Your body went above 2 levels and burned to death!');
       else
         this.dead('Your body went below 2 levels and froze to death!');
     } else {
       this.showLife(newBody);
-      this.body = newBody;
+      this.bodyTemp = newBody;
       levelTemp(temp);
     }
   }
   
   showLife(temp) {
-    let body = this.body;
+    let body = this.bodyTemp;
+
     show('ta-life');
     hide('dbf-hc' + body);
     hide('life' + body);
@@ -98,8 +92,7 @@ class Arena {
   }
   
   colorTiles(phase, resetTiles = false) {
-    let hits = (phase === 1) ? this.hits1 : this.hits2;
-    let hit, clr;
+    let hits = this['hits' + phase], hit, clr;
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
@@ -127,9 +120,7 @@ class Arena {
   }
   
   rotateBosses(phase) {
-    let deg;
-    let orients = (phase === 1) ? this.orients1 : this.orients2;
-    let safe = (phase === 1) ? this.safe1 : this.safe2;
+    let deg, orients = this['orients' + phase];
     let bosses = ['n', 'e', 'w', 's'];
 
     for (let i = 0; i < bosses.length; i++) {
@@ -145,56 +136,51 @@ class Arena {
   }
 
   meters(phase) {
-    let mtr = (phase === 1) ? this.meters1 : this.meters2;
-    move('meter' + mtr[0], 73, 26);
-    move('meter' + mtr[1], 113, 66);
-    move('meter' + mtr[2], 33, 66);
-    move('meter' + mtr[3], 73, 106);
+    let meter = this['meters' + phase];
+    move('meter' + meter[0], 73, 26);
+    move('meter' + meter[1], 113, 66);
+    move('meter' + meter[2], 33, 66);
+    move('meter' + meter[3], 73, 106);
     showAll(METERS);
   }
 
   swords(phase) {
-    let swd, mtr, x, y;
-    if (phase === 1) {
-      swd = this.swords1;
-      mtr = this.meters1;
-    } else {
-      swd = this.swords2;
-      mtr = this.meters2;
-    }
+    let swd = this['swords' + phase];
+    let meter = this['meters' + phase];
+    let x, y;
 
     switch(swd.indexOf('swordn')) {
       case 0: [x, y] = [87, 10.5]; break;
       case 1: [x, y] = [127, 50.5]; break;
-      default: [x, y] = [39, 50.5]; // case 2
+      default: [x, y] = [39, 50.5];
     }
     move('swordn', x, y);
 
     switch(swd.indexOf('sworde')) {
       case 0: [x, y] = [95.5, 39]; break;
       case 1: [x, y] = [135.5, 79]; break;
-      default: [x, y] = [95.5, 127]; // case 3
+      default: [x, y] = [95.5, 127];
     }
     move('sworde', x, y);
 
     switch(swd.indexOf('swordw')) {
       case 0: [x, y] = [50.5, 39]; break;
       case 2: [x, y] = [10.5, 79]; break;
-      default: [x, y] = [50.5, 127]; // case 3
+      default: [x, y] = [50.5, 127];
     }
     move('swordw', x, y);
 
     switch(swd.indexOf('swords')) {
       case 1: [x, y] = [127, 95.5]; break;
       case 2: [x, y] = [39, 95.5]; break;
-      default: [x, y] = [87, 135.5]; // case 3
+      default: [x, y] = [87, 135.5];
     }
     move('swords', x, y);
 
     for (let i = 0; i < SWORDS.length; i++) {
       d3.select('#' + swd[i]).styles({
-        fill: (mtr[i] > 0) ? '#f08080' : '#87cefa',
-        stroke: (mtr[i] > 0) ? '#531515' : '#4668a6'
+        fill: (meter[i] > 0) ? '#f08080' : '#87cefa',
+        stroke: (meter[i] > 0) ? '#531515' : '#4668a6'
       });
       show(SWORDS[i]);
     }
@@ -282,7 +268,7 @@ function setSettings() {
       sessionStorage.removeItem(form);
   }
 
-//  checkStorage('formUseTimer');
+  checkStorage('formUseTimer');
   checkStorage('formMarkSafe');
   checkStorage('formGetBrand');
   startPractice();
@@ -305,7 +291,7 @@ function setPractice() {
   if (sessionStorage.getItem('formGetBrand')) {
     brand = getRand(...TEMPS);
     while (hotcold + brand === 0)
-      brand = getRand(...TEMPS);  
+      brand = getRand(...TEMPS);
   }
 
   safe1 = getRand(...SAFES);
@@ -324,11 +310,13 @@ function setPractice() {
     }
   } while (isSame);
 
-  VIVI = new Player(hotcold, brand);
+  VIVI = new Vivi(hotcold, brand);
   ARENA = new Arena(safe1, safe2, meters1, meters2);
 }
 
 function startPractice() {
+  hide('btnStartPractice');
+  showAll(['btnPractiseAgain', 'btnEditSettings']);
   setPractice();
 
   hide('settings');
@@ -336,41 +324,33 @@ function startPractice() {
 
   addOptions();
   show('bosse');
-  /*
   if (sessionStorage.getItem('formUseTimer')) {
-    SPEED = 1000; // depends on settings;
+    SPEED = 1000; // will depend on settings;
     startMechanic('Hot and Cold');
   } else {
     SPEED = 1000;
     show('btnResolveSwords1');
     show('dbf-intemp');
     show('dbf-eb' + VIVI.brand);
-    VIVI.showLife(VIVI.body);
+    VIVI.showLife(VIVI.bodyTemp);
     levelTemp(VIVI.hotcold);
     ARENA.showClones();
     ARENA.rotateBosses(1);
-    ARENA.meters(1);
-    ARENA.swords(1);
+    ARENA.showSwords(1);
   }
-  */
-  SPEED = 1000;
-  startMechanic('Hot and Cold');
 }
 
-/* buttons for w/o timer
 function resolveSwords1() {
   updateStatus();
   ARENA.colorTiles(1);
   setTimeout(function() {
     hide('btnResolveSwords1');
     VIVI.sword(1);
-    if (VIVI.body >= -2 && VIVI.body <= 2) {
+    if (VIVI.bodyTemp !== 100 && (VIVI.bodyTemp >= -2 && VIVI.bodyTemp <= 2)) {
+      ARENA.hideSwords();
       ARENA.rotateBosses(2);
-      ARENA.meters(2);
-      ARENA.swords(2);
+      ARENA.showSwords(2);
       show('btnResolveSwords2');
-    } else {
-      endPractice();
     }
   }, SPEED);
 }
@@ -381,12 +361,10 @@ function resolveSwords2() {
   setTimeout(function() {
     hide('btnResolveSwords2');
     VIVI.sword(2);
-    if (VIVI.body >= -2 && VIVI.body <= 2) {
+    if (VIVI.bodyTemp !== 100 && (VIVI.bodyTemp >= -2 && VIVI.bodyTemp <= 2)) {
       removeOptions();
       ARENA.hideSwords();
-      show('btnResolveBrand');
-    } else {
-      endPractice();
+      !sessionStorage.getItem('formGetBrand') ? resolveBrand() : show('btnResolveBrand');
     }
   }, SPEED);
 }
@@ -394,18 +372,16 @@ function resolveSwords2() {
 function resolveBrand() {
   let brand = VIVI.brand;
   hide('btnResolveBrand');
-  endPractice();
 
   ARENA.hideClones();
   VIVI.check(brand);
   hide('dbf-eb' + brand);
-  if (VIVI.body === 0) {
+  if (VIVI.bodyTemp === 0) {
     VIVI.win();
   } else {
     VIVI.dead();
   }
 }
-*/
 
 function startTimerHotCold() {
   let time = (VIVI.brand === 0) ? 42 : 49;
@@ -419,13 +395,12 @@ function startTimerHotCold() {
       case 0:
         clearInterval(timerHOTCOLD);
         updateTimer();
-        if (VIVI.body === 0)
+        if (VIVI.bodyTemp === 0)
           VIVI.win();
         else
           VIVI.dead();
         break;
       case 4:
-        endPractice();
         ARENA.hideClones();
         break;
       case 7:
@@ -481,7 +456,7 @@ function startTimerBrand() {
       clearInterval(timerBRAND);
       updateTimer();
       VIVI.check(brand);
-      if (VIVI.body >= -2 || VIVI.body <= 2) 
+      if (VIVI.bodyTemp >= -2 || VIVI.bodyTemp <= 2) 
         hide('dbf-eb' + brand);
     }
   }, SPEED);
@@ -509,7 +484,7 @@ function startMechanic(mechanic, time = 4) {
         case 'Hot and Cold':
           startTimerHotCold();
           show('dbf-intemp');
-          VIVI.showLife(VIVI.body);
+          VIVI.showLife(VIVI.bodyTemp);
           levelTemp(VIVI.hotcold);
           break;
       }
@@ -522,7 +497,7 @@ function startMechanic(mechanic, time = 4) {
 
 function addOptions() {
   function clickTile() {
-    VIVI.pos = this.id;
+    VIVI.position = this.id;
     move('vivi-ans', VIVI.x * 40 + 18, VIVI.y * 40 + 16);
   }
 
@@ -535,11 +510,6 @@ function options(func) {
       d3.select('#tile' + x + y).on('click', func);
     }
   }
-}
-
-function endPractice() {
-  show('btnPractiseAgain');
-  show('btnEditSettings');
 }
 
 function practiseAgain() {
@@ -593,7 +563,7 @@ window.onload = function() {
   } else {
     if (sessionStorage.getItem('editSettings')) {
       sessionStorage.removeItem('editSettings');
-//      checkForm('formUseTimer');
+      checkForm('formUseTimer');
       checkForm('formMarkSafe');
       checkForm('formGetBrand');
     }
