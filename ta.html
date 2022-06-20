@@ -29,120 +29,116 @@
 		<title>Trinity Avowed (Savage) Swords Practice</title>
 	</head>
 	<body>
-		<div class="grid">
+		<main>
 			<div class="menu">
-				<div id="settings">
-					<h2>Settings</h2>
-					<input type="checkbox" id="formTimer" name="formTimer" checked>
-					<label for="formTimer">Practise with a timer</label>
-					<br>
+				<div class="top">
+					<div id="settings" class="hidden">
+						<h1>DRS TA Swords Practice</h1>
 
-					<input type="checkbox" id="formSafe" name="formSafe" checked>
-					<label for="formSafe">Show the safe spot</label>
-					<br>
+						<p>Simulator to practise Trinity Avowed’s Swords phase in <i>Final Fantasy XIV’s</i> Delubrum Reginae (Savage) raid.</p>
+						<h2>Settings</h2>
+						<input type="checkbox" id="formUseTimer" name="formUseTimer" checked>
+						<label for="formUseTimer">Practise with a timer</label>
+						<br>
+						
+						<input type="checkbox" id="formMarkSafe" name="formMarkSafe" checked>
+						<label for="formMarkSafe">Mark the safe spot</label>
+						<br>
 
-					<input type="checkbox" id="formBrand" name="formBrand" checked>
-					<label for="formBrand">Get an <b>Elemental Brand</b> debuff</label>
-					<br>
+						<input type="checkbox" id="formGetBrand" name="formGetBrand" checked>
+						<label for="formGetBrand">Get an <b>Elemental Brand</b> debuff</label>
+						<br>
+					</div>
 
-					<button id="btnStartPractice" class="primary" onclick="startPractice()">Start Practice</button>
+					<div id="info" class="hidden">
+						<div class="debuffs">
+							<div class="intemp">
+								<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
+							</div>
+							<div class="hotcold">
+								<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Normal" title="Normal&#010;&#010;Maintaining an average body temperature." width="100%">
+								<img id="dbf-hc-2" class="hidden" src="img/cold2.png" alt="Running Cold: -2" title="Running Cold: -2&#010;&#010;Body temperature has dropped to 1 level below normal." width="100%">
+								<img id="dbf-hc-1" class="hidden" src="img/cold1.png" alt="Running Cold: -1" title="Running Cold: -1&#010;&#010;Body temperature has dropped to 2 levels below normal." width="100%">
+								<img id="dbf-hc1" class="hidden" src="img/hot1.png" alt="Running Hot: +1" title="Running Hot: +1&#010;&#010;Body temperature has risen to 1 level above normal." width="100%">
+								<img id="dbf-hc2" class="hidden" src="img/hot2.png" alt="Running Hot: +2" title="Running Hot: +2&#010;&#010;Body temperature has risen to 2 levels above normal." width="100%">
+							</div>
+							<div class="brand">
+								<img id="dbf-eb-2" class="hidden" src="img/ice2.png" alt="Cold Brand: -2" title="Cold Brand: -2&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 1 level when this effect expires." width="100%">
+								<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Cold Brand: -1" title="Cold Brand: -1&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 2 levels when this effect expires." width="100%">
+								<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Hot Brand: +1&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 1 level when this effect expires." width="100%">
+								<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
+							</div>
+							<div class="life">
+								<svg width="100%" height="100%" viewBox="0 0 24 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										<g id="ta-life" class="hidden" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<g id="life2" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#F08080" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#F08080"></path>
+														<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+														<line x1="19.5" y1="3.5" x2="19.5" y2="4.5" id="Line-3-Copy-3" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+												</g>
+												<g id="life1" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
+														<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
+												</g>
+												<g id="life-1" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
+														<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
+												</g>
+												<g id="life-2" class="hidden" transform="translate(1.000000, 1.000000)">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#87CEFA"></path>
+														<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+														<line x1="2.5" y1="6.5" x2="2.5" y2="7.5" id="Line-3-Copy-5" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
+												</g>
+												<g id="life0" class="hidden" transform="translate(1.000000, 1.000000)" fill="#A9ACB4">
+														<rect id="Rectangle" stroke="#141822" stroke-width="0.5" x="0" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" x="12" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" x="5" y="3" width="5" height="5"></rect>
+														<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" x="17" y="3" width="5" height="5"></rect>
+														<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5"></path>
+														<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle"></path>
+												</g>
+										</g>
+								</svg>
+							</div>
+							<p id="txt-hotcold"></p>
+							<p id="txt-brand"></p>
+						</div>
+
+						<p id="status"></p>
+					</div>
 				</div>
 
-				<div id="info" class="hidden">
-					<h1>DRS TA Swords Practice</h1>
-
-					<div class="debuffs">
-						<div class="intemp">
-							<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
-						</div>
-						<div class="hotcold">
-							<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Normal" title="Normal&#010;&#010;Maintaining an average body temperature." width="100%">
-							<img id="dbf-hc-2" class="hidden" src="img/cold2.png" alt="Running Cold: -2" title="Running Cold: -2&#010;&#010;Body temperature has dropped to 1 level below normal." width="100%">
-							<img id="dbf-hc-1" class="hidden" src="img/cold1.png" alt="Running Cold: -1" title="Running Cold: -1&#010;&#010;Body temperature has dropped to 2 levels below normal." width="100%">
-							<img id="dbf-hc1" class="hidden" src="img/hot1.png" alt="Running Hot: +1" title="Running Hot: +1&#010;&#010;Body temperature has risen to 1 level above normal." width="100%">
-							<img id="dbf-hc2" class="hidden" src="img/hot2.png" alt="Running Hot: +2" title="Running Hot: +2&#010;&#010;Body temperature has risen to 2 levels above normal." width="100%">
-						</div>
-						<div class="brand">
-							<img id="dbf-eb-2" class="hidden" src="img/ice2.png" alt="Cold Brand: -2" title="Cold Brand: -2&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 1 level when this effect expires." width="100%">
-							<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Cold Brand: -1" title="Cold Brand: -1&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 2 levels when this effect expires." width="100%">
-							<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Hot Brand: +1&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 1 level when this effect expires." width="100%">
-							<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
-						</div>
-						<div class="life">
-							<?xml version="1.0" encoding="UTF-8"?>
-							<svg width="100%" height="100%" viewBox="0 0 24 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-									<g id="ta-life" class="invisible" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<g id="life2" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#F08080" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#F08080"></path>
-													<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-													<line x1="19.5" y1="3.5" x2="19.5" y2="4.5" id="Line-3-Copy-3" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-											</g>
-											<g id="life1" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#F08080"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
-													<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
-											</g>
-											<g id="life-1" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
-													<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
-											</g>
-											<g id="life-2" class="hidden" transform="translate(1.000000, 1.000000)">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5" fill="#87CEFA"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#87CEFA"></path>
-													<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-													<line x1="2.5" y1="6.5" x2="2.5" y2="7.5" id="Line-3-Copy-5" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
-											</g>
-											<g id="life0" class="hidden" transform="translate(1.000000, 1.000000)" fill="#A9ACB4">
-													<rect id="Rectangle" stroke="#141822" stroke-width="0.5" x="0" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" x="12" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" x="5" y="3" width="5" height="5"></rect>
-													<rect id="Rectangle-Copy-3" stroke="#141822" stroke-width="0.5" x="17" y="3" width="5" height="5"></rect>
-													<path d="M11,0 C11.5522847,-1.01453063e-16 12,0.44771525 12,1 L12.0010775,9.26818814 C12.5982846,9.61415066 13,10.2601625 13,11 C13,12.1045695 12.1045695,13 11,13 C9.8954305,13 9,12.1045695 9,11 C9,10.2597476 9.40216612,9.61342606 9.99992752,9.26760632 L10,1 C10,0.44771525 10.4477153,1.01453063e-16 11,0 Z" id="Combined-Shape" stroke="#141822" stroke-width="0.5"></path>
-													<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle"></path>
-											</g>
-									</g>
-							</svg>
-						</div>
-						<p id="txt-hotcold"></p>
-						<p id="txt-brand"></p>
-					</div>
-					<p id="status"></p>
-
-					<div class="buttons">
-						<div class="left">
-							<button id="btnChangeSettings" class="secondary hidden" onclick="location.reload()">Change Settings</button>
-						</div>
-						<div class="right">
-							<button id="btnResolveSwords1" class="secondary hidden" onclick="btnResolveSwords1()">Resolve Swords #1</button>
-							<button id="btnResolveSwords2" class="secondary hidden" onclick="btnResolveSwords2()">Resolve Swords #2</button>
-							<button id="btnResolveBrand" class="secondary hidden" onclick="btnResolveBrand()">Resolve Elemental Brand</button>
-							<button id="btnPractiseAgain" class="hidden" onclick="location.reload()">Practise Again</button>
-						</div>
-					</div>
+				<div class="bottom">
+					<button id="btnStartPractice" class="primary" onclick="setSettings()">Start Practice</button>
+					<button id="btnResolveSwords1" class="hidden" onclick="resolveSwords1()">Resolve Swords #1</button>
+					<button id="btnResolveSwords2" class="hidden" onclick="resolveSwords2()">Resolve Swords #2</button>
+					<button id="btnResolveBrand" class="hidden" onclick="resolveBrand()">Resolve Brand</button>
+					<button id="btnPractiseAgain" class="secondary hidden" onclick="practiseAgain()">Reset Practice</button>
+					<button id="btnEditSettings" class="tertiary hidden" onclick="editSettings()">Change Settings</button>
 				</div>
 			</div>
 
 			<div class="arena">
-				<!--SVG here-->
-				<?xml version="1.0" encoding="UTF-8"?>
 				<svg width="100%" height="100%" viewBox="0 0 176 176" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<defs>
 								<filter x="-3.7%" y="-3.7%" width="107.4%" height="107.4%" filterUnits="objectBoundingBox" id="filter-1">
@@ -271,6 +267,10 @@
 								<rect id="bg31" stroke="#33312E" fill="#F0FFF0" x="128" y="48" width="40" height="40"></rect>
 								<rect id="bg32" stroke="#33312E" fill="#F0FFF0" x="128" y="88" width="40" height="40"></rect>
 								<rect id="bg33" stroke="#33312E" fill="#F0FFF0" x="128" y="128" width="40" height="40"></rect>
+								<path d="M56,84 L56,88 L52,88 L52,84 L56,84 Z M64,84 L64,88 L60,88 L60,84 L64,84 Z M72,84 L72,88 L68,88 L68,84 L72,84 Z M80,84 L80,88 L76,88 L76,84 L80,84 Z M88,84 L88,88 L84,88 L84,84 L88,84 Z M52,80 L52,84 L48,84 L48,80 L52,80 Z M88,76 L88,80 L84,80 L84,76 L88,76 Z M52,72 L52,76 L48,76 L48,72 L52,72 Z M88,68 L88,72 L84,72 L84,68 L88,68 Z M52,64 L52,68 L48,68 L48,64 L52,64 Z M88,60 L88,64 L84,64 L84,60 L88,60 Z M52,56 L52,60 L48,60 L48,56 L52,56 Z M88,52 L88,56 L84,56 L84,52 L88,52 Z M52,48 L52,52 L48,52 L48,48 L52,48 Z M60,48 L60,52 L56,52 L56,48 L60,48 Z M68,48 L68,52 L64,52 L64,48 L68,48 Z M76,48 L76,52 L72,52 L72,48 L76,48 Z M84,48 L84,52 L80,52 L80,48 L84,48 Z" id="tilesafe1" class="hidden" fill="#33312E" opacity="0.952396938"></path>
+								<path d="M96,84 L96,88 L92,88 L92,84 L96,84 Z M104,84 L104,88 L100,88 L100,84 L104,84 Z M112,84 L112,88 L108,88 L108,84 L112,84 Z M120,84 L120,88 L116,88 L116,84 L120,84 Z M128,84 L128,88 L124,88 L124,84 L128,84 Z M92,80 L92,84 L88,84 L88,80 L92,80 Z M128,76 L128,80 L124,80 L124,76 L128,76 Z M92,72 L92,76 L88,76 L88,72 L92,72 Z M128,68 L128,72 L124,72 L124,68 L128,68 Z M92,64 L92,68 L88,68 L88,64 L92,64 Z M128,60 L128,64 L124,64 L124,60 L128,60 Z M92,56 L92,60 L88,60 L88,56 L92,56 Z M128,52 L128,56 L124,56 L124,52 L128,52 Z M92,48 L92,52 L88,52 L88,48 L92,48 Z M100,48 L100,52 L96,52 L96,48 L100,48 Z M108,48 L108,52 L104,52 L104,48 L108,48 Z M116,48 L116,52 L112,52 L112,48 L116,48 Z M124,48 L124,52 L120,52 L120,48 L124,48 Z" id="tilesafe2" class="hidden" fill="#33312E" opacity="0.952396938"></path>
+								<path d="M96,124 L96,128 L92,128 L92,124 L96,124 Z M104,124 L104,128 L100,128 L100,124 L104,124 Z M112,124 L112,128 L108,128 L108,124 L112,124 Z M120,124 L120,128 L116,128 L116,124 L120,124 Z M128,124 L128,128 L124,128 L124,124 L128,124 Z M92,120 L92,124 L88,124 L88,120 L92,120 Z M128,116 L128,120 L124,120 L124,116 L128,116 Z M92,112 L92,116 L88,116 L88,112 L92,112 Z M128,108 L128,112 L124,112 L124,108 L128,108 Z M92,104 L92,108 L88,108 L88,104 L92,104 Z M128,100 L128,104 L124,104 L124,100 L128,100 Z M92,96 L92,100 L88,100 L88,96 L92,96 Z M128,92 L128,96 L124,96 L124,92 L128,92 Z M92,88 L92,92 L88,92 L88,88 L92,88 Z M100,88 L100,92 L96,92 L96,88 L100,88 Z M108,88 L108,92 L104,92 L104,88 L108,88 Z M116,88 L116,92 L112,92 L112,88 L116,88 Z M124,88 L124,92 L120,92 L120,88 L124,88 Z" id="tilesafe3" class="hidden" fill="#33312E" opacity="0.952396938"></path>
+								<path d="M56,124 L56,128 L52,128 L52,124 L56,124 Z M64,124 L64,128 L60,128 L60,124 L64,124 Z M72,124 L72,128 L68,128 L68,124 L72,124 Z M80,124 L80,128 L76,128 L76,124 L80,124 Z M88,124 L88,128 L84,128 L84,124 L88,124 Z M52,120 L52,124 L48,124 L48,120 L52,120 Z M88,116 L88,120 L84,120 L84,116 L88,116 Z M52,112 L52,116 L48,116 L48,112 L52,112 Z M88,108 L88,112 L84,112 L84,108 L88,108 Z M52,104 L52,108 L48,108 L48,104 L52,104 Z M88,100 L88,104 L84,104 L84,100 L88,100 Z M52,96 L52,100 L48,100 L48,96 L52,96 Z M88,92 L88,96 L84,96 L84,92 L88,92 Z M52,88 L52,92 L48,92 L48,88 L52,88 Z M60,88 L60,92 L56,92 L56,88 L60,88 Z M68,88 L68,92 L64,92 L64,88 L68,88 Z M76,88 L76,92 L72,92 L72,88 L76,88 Z M84,88 L84,92 L80,92 L80,88 L84,88 Z" id="tilesafe4" class="hidden" fill="#33312E" opacity="0.952396938"></path>
 								<g id="vivi-ans" transform="translate(58.000000, 96.000000)">
 										<g id="vivi-south">
 												<path d="M3,16 L3,15 L2,15 L2,14 L1,14 L1,13 L0,13 L0,10 L1,10 L1,9 L2,9 L2,8 L3,8 L3,7 L2,7 L2,6 L1,6 L1,4 L2,4 L2,3 L4,3 L4,2 L6,2 L6,1 L7,1 L7,0 L9,0 L9,1 L10,1 L10,2 L12,2 L12,3 L14,3 L14,4 L15,4 L15,6 L14,6 L14,7 L13,7 L13,8 L14,8 L14,9 L15,9 L15,10 L16,10 L16,13 L15,13 L15,14 L14,14 L14,15 L13,15 L13,16 L3,16 Z" id="outline" fill="#000000"></path>
@@ -281,14 +281,14 @@
 												<rect id="eye-l" fill="#FFD700" transform="translate(9.500000, 8.500000) scale(-1, 1) translate(-9.500000, -8.500000) " x="9" y="8" width="1" height="1"></rect>
 												<rect id="eye-r" fill="#FFD700" x="6" y="8" width="1" height="1"></rect>
 										</g>
-										<g id="vivi-dead" transform="translate(0.000000, 1.000000)">
+										<g id="vivi-dead" class="hidden" transform="translate(0.000000, 1.000000)">
 												<path d="M3,14 L3,13 L2,13 L2,12 L1,12 L1,11 L0,11 L0,9 L1,9 L1,8 L3,8 L3,7 L4,7 L4,2 L5,2 L5,1 L6,1 L6,0 L8,0 L8,1 L9,1 L9,2 L8,2 L8,4 L11,4 L11,3 L14,3 L14,5 L13,5 L13,6 L12,6 L12,7 L14,7 L14,8 L15,8 L15,9 L16,9 L16,12 L15,12 L15,14 L14,14 L14,15 L9,15 L9,14 L3,14 Z" id="outline" fill="#000000"></path>
 												<path d="M3,13 L3,12 L2,12 L2,10 L4,10 L4,13 L3,13 Z M5,11 L6,11 L6,10 L8,10 L8,9 L10,9 L10,8 L11,8 L11,7 L12,7 L12,8 L14,8 L14,9 L15,9 L15,12 L14,12 L14,14 L9,14 L9,13 L5,13 L5,11 Z" id="robe" fill="#4169E1"></path>
 												<rect id="hand-big" fill="#FFDAB9" x="5" y="11" width="2" height="2"></rect>
 												<rect id="hand-s" fill="#FFDAB9" x="3" y="11" width="1" height="1"></rect>
 												<path d="M5,2 L6,2 L6,1 L8,1 L8,2 L7,2 L7,4 L8,4 L8,5 L11,5 L11,4 L13,4 L13,5 L12,5 L12,6 L11,6 L11,7 L10,7 L10,8 L9,8 L9,9 L7,9 L7,10 L1,10 L1,9 L3,9 L3,8 L4,8 L4,7 L5,7 L5,2 Z" id="hat" fill="#DAA520"></path>
 										</g>
-										<g id="vivi-win" transform="translate(1.000000, 0.000000)">
+										<g id="vivi-win" class="hidden" transform="translate(1.000000, 0.000000)">
 												<path d="M0,12 L0,8 L1,8 L1,6 L0,6 L0,4 L1,4 L1,3 L3,3 L3,2 L5,2 L5,1 L6,1 L6,0 L8,0 L8,1 L9,1 L9,2 L11,2 L11,3 L13,3 L13,4 L14,4 L14,6 L13,6 L13,7 L12,7 L12,8 L13,8 L13,9 L14,9 L14,10 L15,10 L15,14 L14,14 L14,15 L13,15 L13,16 L2,16 L2,15 L1,15 L1,14 L2,14 L2,13 L1,13 L1,12 L0,12 Z" id="outline" fill="#000000"></path>
 												<path d="M4,8 L4,9 L5,9 L5,10 L9,10 L9,9 L11,9 L11,8 L12,8 L12,9 L13,9 L13,10 L14,10 L14,14 L13,14 L13,15 L2,15 L2,14 L3,14 L3,13 L2,13 L2,12 L3,12 L3,8 L4,8 Z M12,11 L9,11 L9,13 L10,13 L10,14 L12,14 L12,11 Z M2,8 L2,12 L1,12 L1,8 L2,8 Z" id="robe" fill="#4169E1"></path>
 												<rect id="hand-l" fill="#FFDAB9" x="10" y="11" width="2" height="2"></rect>
@@ -298,8 +298,8 @@
 												<rect id="eye-l" fill="#FFD700" x="8" y="8" width="1" height="1"></rect>
 										</g>
 								</g>
-								<g id="bossn" transform="translate(71.000000, 31.000000)">
-										<g id="facen" filter="url(#filter-1)" transform="translate(17.000000, 17.000000) rotate(180.000000) translate(-17.000000, -17.000000) ">
+								<g id="bossn" class="hidden" transform="translate(71.000000, 31.000000)">
+										<g id="facen" filter="url(#filter-1)">
 												<rect id="facebg" fill="#8FBC8F" opacity="0" x="0" y="0" width="34" height="34"></rect>
 												<ellipse id="face" stroke="#421111" stroke-width="0.5" fill="#B75555" cx="17" cy="17" rx="6" ry="7"></ellipse>
 												<path d="M19.5,20.5 C18.7538079,19.5 17.9204746,19 17,19 C16.0795254,19 15.2461921,19.5 14.5,20.5 L19.5,20.5 Z" id="mouth" fill="#310D0D" transform="translate(17.000000, 19.750000) scale(-1, 1) translate(-17.000000, -19.750000) "></path>
@@ -309,8 +309,8 @@
 												<path d="M20,29 L17,34 L14,29 L17,29.75 L20,29 Z M22.5407668,7.84146944 C25.2290308,9.81328976 27,13.1791473 27,17 C27,23.0751322 22.5228475,28 17,28 C11.4771525,28 7,23.0751322 7,17 C7,13.1791473 8.77096922,9.81328976 11.4592332,7.84146944 L12.2622026,9.74730487 C10.2837507,11.3857672 9,14.0242258 9,17 C9,21.9705627 12.581722,26 17,26 C21.418278,26 25,21.9705627 25,17 C25,14.0247307 23.7166849,11.3866625 21.7388044,9.74813892 L22.5407668,7.84146944 Z" id="hitbox" fill="#CD5C5C"></path>
 										</g>
 								</g>
-								<g id="bosse" transform="translate(111.000000, 71.000000)">
-										<g id="facee" filter="url(#filter-2)" transform="translate(17.000000, 17.000000) rotate(180.000000) translate(-17.000000, -17.000000) ">
+								<g id="bosse" class="hidden" transform="translate(111.000000, 71.000000)">
+										<g id="facee" filter="url(#filter-2)">
 												<rect id="facebg" fill="#8FBC8F" opacity="0" x="0" y="0" width="34" height="34"></rect>
 												<ellipse id="face" stroke="#421111" stroke-width="0.5" fill="#B75555" cx="17" cy="17" rx="6" ry="7"></ellipse>
 												<path d="M19.5,20.5 C18.7538079,19.5 17.9204746,19 17,19 C16.0795254,19 15.2461921,19.5 14.5,20.5 L19.5,20.5 Z" id="mouth" fill="#310D0D" transform="translate(17.000000, 19.750000) scale(-1, 1) translate(-17.000000, -19.750000) "></path>
@@ -320,8 +320,8 @@
 												<path d="M20,29 L17,34 L14,29 L17,29.75 L20,29 Z M22.5407668,7.84146944 C25.2290308,9.81328976 27,13.1791473 27,17 C27,23.0751322 22.5228475,28 17,28 C11.4771525,28 7,23.0751322 7,17 C7,13.1791473 8.77096922,9.81328976 11.4592332,7.84146944 L12.2622026,9.74730487 C10.2837507,11.3857672 9,14.0242258 9,17 C9,21.9705627 12.581722,26 17,26 C21.418278,26 25,21.9705627 25,17 C25,14.0247307 23.7166849,11.3866625 21.7388044,9.74813892 L22.5407668,7.84146944 Z" id="hitbox" fill="#CD5C5C"></path>
 										</g>
 								</g>
-								<g id="bossw" transform="translate(31.000000, 71.000000)">
-										<g id="facew" filter="url(#filter-3)" transform="translate(17.000000, 17.000000) rotate(180.000000) translate(-17.000000, -17.000000) ">
+								<g id="bossw" class="hidden" transform="translate(31.000000, 71.000000)">
+										<g id="facew" filter="url(#filter-3)">
 												<rect id="facebg" fill="#8FBC8F" opacity="0" x="0" y="0" width="34" height="34"></rect>
 												<ellipse id="face" stroke="#421111" stroke-width="0.5" fill="#B75555" cx="17" cy="17" rx="6" ry="7"></ellipse>
 												<path d="M19.5,20.5 C18.7538079,19.5 17.9204746,19 17,19 C16.0795254,19 15.2461921,19.5 14.5,20.5 L19.5,20.5 Z" id="mouth" fill="#310D0D" transform="translate(17.000000, 19.750000) scale(-1, 1) translate(-17.000000, -19.750000) "></path>
@@ -331,8 +331,8 @@
 												<path d="M20,29 L17,34 L14,29 L17,29.75 L20,29 Z M22.5407668,7.84146944 C25.2290308,9.81328976 27,13.1791473 27,17 C27,23.0751322 22.5228475,28 17,28 C11.4771525,28 7,23.0751322 7,17 C7,13.1791473 8.77096922,9.81328976 11.4592332,7.84146944 L12.2622026,9.74730487 C10.2837507,11.3857672 9,14.0242258 9,17 C9,21.9705627 12.581722,26 17,26 C21.418278,26 25,21.9705627 25,17 C25,14.0247307 23.7166849,11.3866625 21.7388044,9.74813892 L22.5407668,7.84146944 Z" id="hitbox" fill="#CD5C5C"></path>
 										</g>
 								</g>
-								<g id="bosss" transform="translate(71.000000, 111.000000)">
-										<g id="faces" filter="url(#filter-4)" transform="translate(17.000000, 17.000000) rotate(180.000000) translate(-17.000000, -17.000000) ">
+								<g id="bosss" class="hidden" transform="translate(71.000000, 111.000000)">
+										<g id="faces" filter="url(#filter-4)">
 												<rect id="facebg" fill="#8FBC8F" opacity="0" x="0" y="0" width="34" height="34"></rect>
 												<ellipse id="face" stroke="#421111" stroke-width="0.5" fill="#B75555" cx="17" cy="17" rx="6" ry="7"></ellipse>
 												<path d="M19.5,20.5 C18.7538079,19.5 17.9204746,19 17,19 C16.0795254,19 15.2461921,19.5 14.5,20.5 L19.5,20.5 Z" id="mouth" fill="#310D0D" transform="translate(17.000000, 19.750000) scale(-1, 1) translate(-17.000000, -19.750000) "></path>
@@ -342,19 +342,19 @@
 												<path d="M20,29 L17,34 L14,29 L17,29.75 L20,29 Z M22.5407668,7.84146944 C25.2290308,9.81328976 27,13.1791473 27,17 C27,23.0751322 22.5228475,28 17,28 C11.4771525,28 7,23.0751322 7,17 C7,13.1791473 8.77096922,9.81328976 11.4592332,7.84146944 L12.2622026,9.74730487 C10.2837507,11.3857672 9,14.0242258 9,17 C9,21.9705627 12.581722,26 17,26 C21.418278,26 25,21.9705627 25,17 C25,14.0247307 23.7166849,11.3866625 21.7388044,9.74813892 L22.5407668,7.84146944 Z" id="hitbox" fill="#CD5C5C"></path>
 										</g>
 								</g>
-								<g id="swordn" filter="url(#filter-5)" transform="translate(127.000000, 50.500000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
+								<g id="swordn" class="hidden" filter="url(#filter-5)" transform="translate(127.000000, 50.500000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
 										<path d="M1.25,5 L5,0 L8.75,5 L7.5,23.75 L10,23.75 L10,26.25 L6.25,26.25 L6.25,30 L3.75,30 L3.75,26.25 L0,26.25 L0,23.75 L2.5,23.75 L1.25,5 Z" id="Combined-Shape"></path>
 								</g>
-								<g id="sworde" filter="url(#filter-6)" transform="translate(95.500000, 39.000000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
+								<g id="sworde" class="hidden" filter="url(#filter-6)" transform="translate(95.500000, 39.000000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
 										<path d="M6.25,10 L3.75,10 L3.75,6.25 L0,6.25 L0,3.75 L3.75,3.75 L3.75,-3.82702125e-17 L6.25,-1.91351062e-16 L6.25,2.5 L25,1.25 L30,5 L25,8.75 L6.25,7.5 L6.25,10 Z" id="Combined-Shape"></path>
 								</g>
-								<g id="swordw" filter="url(#filter-7)" transform="translate(10.500000, 79.000000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
+								<g id="swordw" class="hidden" filter="url(#filter-7)" transform="translate(10.500000, 79.000000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
 										<path d="M23.75,0 L26.25,0 L26.25,3.75 L30,3.75 L30,6.25 L26.25,6.25 L26.25,10 L23.75,10 L23.75,7.5 L5,8.75 L2.29621275e-16,5 L5,1.25 L23.75,2.5 L23.75,0 Z" id="Combined-Shape"></path>
 								</g>
-								<g id="swords" filter="url(#filter-8)" transform="translate(87.000000, 135.500000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
+								<g id="swords" class="hidden" filter="url(#filter-8)" transform="translate(87.000000, 135.500000)" fill="#F08080" stroke="#531515" stroke-width="0.25">
 										<path d="M0,6.25 L0,3.75 L3.75,3.75 L3.75,8.8817842e-16 L6.25,8.8817842e-16 L6.25,3.75 L10,3.75 L10,6.25 L7.5,6.25 L8.75,25 L5,30 L1.25,25 L2.5,6.25 L0,6.25 Z" id="Combined-Shape"></path>
 								</g>
-								<g id="meter2" filter="url(#filter-9)" transform="translate(73.000000, 106.000000)">
+								<g id="meter2" class="hidden" filter="url(#filter-9)" transform="translate(73.000000, 106.000000)">
 										<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
@@ -364,7 +364,7 @@
 										<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
 										<line x1="19.5" y1="3.5" x2="19.5" y2="4.5" id="Line-3-Copy-3" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
 								</g>
-								<g id="meter1" filter="url(#filter-10)" transform="translate(33.000000, 66.000000)">
+								<g id="meter1" class="hidden" filter="url(#filter-10)" transform="translate(33.000000, 66.000000)">
 										<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#F08080" x="12" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="5" y="3" width="5" height="5"></rect>
@@ -373,7 +373,7 @@
 										<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
 										<line x1="14.5" y1="3.5" x2="14.5" y2="4.5" id="Line-3-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
 								</g>
-								<g id="meter-1" filter="url(#filter-11)" transform="translate(113.000000, 66.000000)">
+								<g id="meter-1" class="hidden" filter="url(#filter-11)" transform="translate(113.000000, 66.000000)">
 										<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="0" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
@@ -382,7 +382,7 @@
 										<path d="M11,0.25 C11.4142136,0.25 11.75,0.585786438 11.75,1 L11.75,3.75 L11.75,3.75 L10.25,3.75 L10.25,1 C10.25,0.585786438 10.5857864,0.25 11,0.25 Z" id="Rectangle" fill="#A9ACB4"></path>
 										<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" stroke-linecap="square"></line>
 								</g>
-								<g id="meter-2" filter="url(#filter-12)" transform="translate(73.000000, 26.000000)">
+								<g id="meter-2" class="hidden" filter="url(#filter-12)" transform="translate(73.000000, 26.000000)">
 										<rect id="Rectangle" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="0" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy-2" stroke="#141822" stroke-width="0.5" fill="#A9ACB4" x="12" y="3" width="5" height="5"></rect>
 										<rect id="Rectangle-Copy" stroke="#141822" stroke-width="0.5" fill="#87CEFA" x="5" y="3" width="5" height="5"></rect>
@@ -411,7 +411,8 @@
 						</g>
 				</svg>
 			</div>
-		</div>
+		</main>
+
 		<footer><p>Made by Regen Aloy [Zalera] 2022 &copy; SQUARE ENIX CO., LTD. All Rights Reserved. | <a href="https://forms.gle/5T6Uut7EgeR9JiL36">Send feedback</a></p></footer>
 		<script src="js/main.min.js"></script>
 	</body>
