@@ -142,7 +142,7 @@ main {
 		display: block;
 		margin: auto;
 		width: 85%;
-		height: 85%;
+		height: auto;
 	}
 }
 
