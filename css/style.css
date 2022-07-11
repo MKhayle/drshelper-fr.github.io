@@ -35,11 +35,6 @@ button:hover, input:hover, label:hover {
 b { font-weight: 700; }
 i { font-style: italic; }
 
-a {
-	color: var(--link);
-	font-weight: 500;
-}
-
 h1 {
 	border-bottom: 2px solid black;
 	font-size: 1rem;
