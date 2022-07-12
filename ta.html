@@ -9,7 +9,7 @@
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="css/reset.min.css">
 		<link rel="stylesheet" href="css/style.min.css">
 
@@ -34,8 +34,8 @@
 				<div class="top">
 					<div id="settings" class="hidden">
 						<h1>DRS TA Swords Practice</h1>
-
 						<p>Simulator to practise Trinity Avowed’s Swords phase in <i>Final Fantasy XIV’s</i> Delubrum Reginae (Savage) raid.</p>
+
 						<h2>Settings</h2>
 						<input type="checkbox" id="formUseTimer" name="formUseTimer" checked>
 						<label for="formUseTimer">Practise with a timer</label>
@@ -54,6 +54,7 @@
 						<div class="debuffs">
 							<div class="intemp">
 								<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
+								<p id="txt-hotcold"></p>
 							</div>
 							<div class="hotcold">
 								<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Normal" title="Normal&#010;&#010;Maintaining an average body temperature." width="100%">
@@ -67,6 +68,7 @@
 								<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Cold Brand: -1" title="Cold Brand: -1&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 2 levels when this effect expires." width="100%">
 								<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Hot Brand: +1&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 1 level when this effect expires." width="100%">
 								<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
+								<p id="txt-brand"></p>
 							</div>
 							<div class="life">
 								<svg width="100%" height="100%" viewBox="0 0 24 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -120,8 +122,6 @@
 										</g>
 								</svg>
 							</div>
-							<p id="txt-hotcold"></p>
-							<p id="txt-brand"></p>
 						</div>
 
 						<p id="status"></p>
@@ -129,7 +129,7 @@
 				</div>
 
 				<div class="bottom">
-					<button id="btnStartPractice" class="primary" onclick="setSettings()">Start Practice</button>
+					<button id="btnStartPractice" onclick="setSettings()">Start Practice</button>
 					<button id="btnResolveSwords1" class="hidden" onclick="resolveSwords1()">Resolve Swords #1</button>
 					<button id="btnResolveSwords2" class="hidden" onclick="resolveSwords2()">Resolve Swords #2</button>
 					<button id="btnResolveBrand" class="hidden" onclick="resolveBrand()">Resolve Brand</button>
@@ -251,22 +251,22 @@
 								</filter>
 						</defs>
 						<g id="ta-sword" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-								<rect id="bg00" stroke="#33312E" fill="#F0FFF0" x="8" y="8" width="40" height="40"></rect>
-								<rect id="bg01" stroke="#33312E" fill="#F0FFF0" x="8" y="48" width="40" height="40"></rect>
-								<rect id="bg02" stroke="#33312E" fill="#F0FFF0" x="8" y="88" width="40" height="40"></rect>
-								<rect id="bg03" stroke="#33312E" fill="#F0FFF0" x="8" y="128" width="40" height="40"></rect>
-								<rect id="bg10" stroke="#33312E" fill="#F0FFF0" x="48" y="8" width="40" height="40"></rect>
-								<rect id="bg11" stroke="#33312E" fill="#F0FFF0" x="48" y="48" width="40" height="40"></rect>
-								<rect id="bg12" stroke="#33312E" fill="#F0FFF0" x="48" y="88" width="40" height="40"></rect>
-								<rect id="bg13" stroke="#33312E" fill="#F0FFF0" x="48" y="128" width="40" height="40"></rect>
-								<rect id="bg20" stroke="#33312E" fill="#F0FFF0" x="88" y="8" width="40" height="40"></rect>
-								<rect id="bg21" stroke="#33312E" fill="#F0FFF0" x="88" y="48" width="40" height="40"></rect>
-								<rect id="bg22" stroke="#33312E" fill="#F0FFF0" x="88" y="88" width="40" height="40"></rect>
-								<rect id="bg23" stroke="#33312E" fill="#F0FFF0" x="88" y="128" width="40" height="40"></rect>
-								<rect id="bg30" stroke="#33312E" fill="#F0FFF0" x="128" y="8" width="40" height="40"></rect>
-								<rect id="bg31" stroke="#33312E" fill="#F0FFF0" x="128" y="48" width="40" height="40"></rect>
-								<rect id="bg32" stroke="#33312E" fill="#F0FFF0" x="128" y="88" width="40" height="40"></rect>
-								<rect id="bg33" stroke="#33312E" fill="#F0FFF0" x="128" y="128" width="40" height="40"></rect>
+								<rect id="bg00" stroke="#33312E" fill="#FFFFF0" x="8" y="8" width="40" height="40"></rect>
+								<rect id="bg01" stroke="#33312E" fill="#FFFFF0" x="8" y="48" width="40" height="40"></rect>
+								<rect id="bg02" stroke="#33312E" fill="#FFFFF0" x="8" y="88" width="40" height="40"></rect>
+								<rect id="bg03" stroke="#33312E" fill="#FFFFF0" x="8" y="128" width="40" height="40"></rect>
+								<rect id="bg10" stroke="#33312E" fill="#FFFFF0" x="48" y="8" width="40" height="40"></rect>
+								<rect id="bg11" stroke="#33312E" fill="#FFFFF0" x="48" y="48" width="40" height="40"></rect>
+								<rect id="bg12" stroke="#33312E" fill="#FFFFF0" x="48" y="88" width="40" height="40"></rect>
+								<rect id="bg13" stroke="#33312E" fill="#FFFFF0" x="48" y="128" width="40" height="40"></rect>
+								<rect id="bg20" stroke="#33312E" fill="#FFFFF0" x="88" y="8" width="40" height="40"></rect>
+								<rect id="bg21" stroke="#33312E" fill="#FFFFF0" x="88" y="48" width="40" height="40"></rect>
+								<rect id="bg22" stroke="#33312E" fill="#FFFFF0" x="88" y="88" width="40" height="40"></rect>
+								<rect id="bg23" stroke="#33312E" fill="#FFFFF0" x="88" y="128" width="40" height="40"></rect>
+								<rect id="bg30" stroke="#33312E" fill="#FFFFF0" x="128" y="8" width="40" height="40"></rect>
+								<rect id="bg31" stroke="#33312E" fill="#FFFFF0" x="128" y="48" width="40" height="40"></rect>
+								<rect id="bg32" stroke="#33312E" fill="#FFFFF0" x="128" y="88" width="40" height="40"></rect>
+								<rect id="bg33" stroke="#33312E" fill="#FFFFF0" x="128" y="128" width="40" height="40"></rect>
 								<path d="M56,84 L56,88 L52,88 L52,84 L56,84 Z M64,84 L64,88 L60,88 L60,84 L64,84 Z M72,84 L72,88 L68,88 L68,84 L72,84 Z M80,84 L80,88 L76,88 L76,84 L80,84 Z M88,84 L88,88 L84,88 L84,84 L88,84 Z M52,80 L52,84 L48,84 L48,80 L52,80 Z M88,76 L88,80 L84,80 L84,76 L88,76 Z M52,72 L52,76 L48,76 L48,72 L52,72 Z M88,68 L88,72 L84,72 L84,68 L88,68 Z M52,64 L52,68 L48,68 L48,64 L52,64 Z M88,60 L88,64 L84,64 L84,60 L88,60 Z M52,56 L52,60 L48,60 L48,56 L52,56 Z M88,52 L88,56 L84,56 L84,52 L88,52 Z M52,48 L52,52 L48,52 L48,48 L52,48 Z M60,48 L60,52 L56,52 L56,48 L60,48 Z M68,48 L68,52 L64,52 L64,48 L68,48 Z M76,48 L76,52 L72,52 L72,48 L76,48 Z M84,48 L84,52 L80,52 L80,48 L84,48 Z" id="tilesafe1" class="hidden" fill="#33312E" opacity="0.952396938"></path>
 								<path d="M96,84 L96,88 L92,88 L92,84 L96,84 Z M104,84 L104,88 L100,88 L100,84 L104,84 Z M112,84 L112,88 L108,88 L108,84 L112,84 Z M120,84 L120,88 L116,88 L116,84 L120,84 Z M128,84 L128,88 L124,88 L124,84 L128,84 Z M92,80 L92,84 L88,84 L88,80 L92,80 Z M128,76 L128,80 L124,80 L124,76 L128,76 Z M92,72 L92,76 L88,76 L88,72 L92,72 Z M128,68 L128,72 L124,72 L124,68 L128,68 Z M92,64 L92,68 L88,68 L88,64 L92,64 Z M128,60 L128,64 L124,64 L124,60 L128,60 Z M92,56 L92,60 L88,60 L88,56 L92,56 Z M128,52 L128,56 L124,56 L124,52 L128,52 Z M92,48 L92,52 L88,52 L88,48 L92,48 Z M100,48 L100,52 L96,52 L96,48 L100,48 Z M108,48 L108,52 L104,52 L104,48 L108,48 Z M116,48 L116,52 L112,52 L112,48 L116,48 Z M124,48 L124,52 L120,52 L120,48 L124,48 Z" id="tilesafe2" class="hidden" fill="#33312E" opacity="0.952396938"></path>
 								<path d="M96,124 L96,128 L92,128 L92,124 L96,124 Z M104,124 L104,128 L100,128 L100,124 L104,124 Z M112,124 L112,128 L108,128 L108,124 L112,124 Z M120,124 L120,128 L116,128 L116,124 L120,124 Z M128,124 L128,128 L124,128 L124,124 L128,124 Z M92,120 L92,124 L88,124 L88,120 L92,120 Z M128,116 L128,120 L124,120 L124,116 L128,116 Z M92,112 L92,116 L88,116 L88,112 L92,112 Z M128,108 L128,112 L124,112 L124,108 L128,108 Z M92,104 L92,108 L88,108 L88,104 L92,104 Z M128,100 L128,104 L124,104 L124,100 L128,100 Z M92,96 L92,100 L88,100 L88,96 L92,96 Z M128,92 L128,96 L124,96 L124,92 L128,92 Z M92,88 L92,92 L88,92 L88,88 L92,88 Z M100,88 L100,92 L96,92 L96,88 L100,88 Z M108,88 L108,92 L104,92 L104,88 L108,88 Z M116,88 L116,92 L112,92 L112,88 L116,88 Z M124,88 L124,92 L120,92 L120,88 L124,88 Z" id="tilesafe3" class="hidden" fill="#33312E" opacity="0.952396938"></path>
@@ -392,28 +392,29 @@
 										<line x1="7.5" y1="6.5" x2="7.5" y2="7.5" id="Line-3-Copy-4" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
 										<line x1="2.5" y1="6.5" x2="2.5" y2="7.5" id="Line-3-Copy-5" stroke="#141822" stroke-width="0.5" stroke-linecap="square"></line>
 								</g>
-								<rect id="tile00" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="8" width="40" height="40"></rect>
-								<rect id="tile01" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="48" width="40" height="40"></rect>
-								<rect id="tile02" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="88" width="40" height="40"></rect>
-								<rect id="tile03" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="128" width="40" height="40"></rect>
-								<rect id="tile10" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="8" width="40" height="40"></rect>
-								<rect id="tile11" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="48" width="40" height="40"></rect>
-								<rect id="tile12" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="88" width="40" height="40"></rect>
-								<rect id="tile13" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="128" width="40" height="40"></rect>
-								<rect id="tile20" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="8" width="40" height="40"></rect>
-								<rect id="tile21" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="48" width="40" height="40"></rect>
-								<rect id="tile22" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="88" width="40" height="40"></rect>
-								<rect id="tile23" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="128" width="40" height="40"></rect>
-								<rect id="tile30" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="8" width="40" height="40"></rect>
-								<rect id="tile31" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="48" width="40" height="40"></rect>
-								<rect id="tile32" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="88" width="40" height="40"></rect>
-								<rect id="tile33" fill="#F0FFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="128" width="40" height="40"></rect>
+								<rect id="tile00" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="8" width="40" height="40"></rect>
+								<rect id="tile01" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="48" width="40" height="40"></rect>
+								<rect id="tile02" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="88" width="40" height="40"></rect>
+								<rect id="tile03" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="8" y="128" width="40" height="40"></rect>
+								<rect id="tile10" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="8" width="40" height="40"></rect>
+								<rect id="tile11" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="48" width="40" height="40"></rect>
+								<rect id="tile12" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="88" width="40" height="40"></rect>
+								<rect id="tile13" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="48" y="128" width="40" height="40"></rect>
+								<rect id="tile20" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="8" width="40" height="40"></rect>
+								<rect id="tile21" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="48" width="40" height="40"></rect>
+								<rect id="tile22" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="88" width="40" height="40"></rect>
+								<rect id="tile23" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="88" y="128" width="40" height="40"></rect>
+								<rect id="tile30" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="8" width="40" height="40"></rect>
+								<rect id="tile31" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="48" width="40" height="40"></rect>
+								<rect id="tile32" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="88" width="40" height="40"></rect>
+								<rect id="tile33" fill="#FFFFF0" opacity="0.0495205834" style="mix-blend-mode: darken;" x="128" y="128" width="40" height="40"></rect>
 						</g>
 				</svg>
 			</div>
 		</main>
 
 		<footer><p>Made by Regen Aloy [Zalera] 2022 &copy; SQUARE ENIX CO., LTD. All Rights Reserved.</p></footer>
+
 		<script src="js/main.min.js"></script>
 	</body>
 </html>

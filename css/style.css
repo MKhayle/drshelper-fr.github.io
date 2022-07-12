@@ -1,47 +1,41 @@
 :root {
-	--lg: 1.125rem;
+	--lg: 1.424rem;
+	--md: 1.266rem;
+	--body: 1.125rem;
 	--sm: 0.889rem;
-	--xs: 0.79rem;
-	--black: black;
-	--white: floralwhite;
-	--link: maroon;
+	--black: #140a1f;
 }
 
 html {
 	box-sizing: border-box;
-	font-size: 16px;
+	font-size: 100%;
 }
-@media only screen and (min-width: 768px) {
-	html {
-		font-size: 18px;
-	}
-}
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
 	box-sizing: inherit;
 }
 
 body {
-	background-color: antiquewhite;
-	color: black;
+	background-color: floralwhite;
+	color: var(--black);
 	font-family: 'Public Sans', sans-serif;
 	font-size: 1rem;
-	line-height: 1.4rem;
+	line-height: 1.4em;
+} @media only screen and (min-width: 992px) {
+	body, button {
+		font-size: var(--body);
+	}
 }
-
-button:hover, input:hover, label:hover {
-	cursor: pointer;
-}
-
-b { font-weight: 700; }
-i { font-style: italic; }
 
 h1 {
-	border-bottom: 2px solid black;
-	font-size: 1rem;
+	border-bottom: 2px solid var(--black);
+	font-size: var(--body);
 	font-weight: 700;
 	line-height: 1.1em;
 	margin-bottom: 1rem;
-	padding: 0.25rem 1rem 0.5rem 0.5rem;
+	padding: 0.5rem;
 	width: fit-content;
 }
 
@@ -49,42 +43,43 @@ h2 {
 	font-size: var(--sm);
 	font-weight: 700;
 	letter-spacing: 0.1em;
-	margin-top: 1rem;
+	margin-top: 4vh;
 	text-transform: uppercase;
 }
 
 button {
 	background-color: var(--black);
-	border: 2px solid black;
-	border-radius: 12px;
-	color: var(--white);
+	border: 2px solid var(--black);
+	border-radius: 16px;
+	color: #e8e7e9;
 	font-family: 'Public Sans', sans-serif;
-	font-size: var(--sm);
 	font-weight: 500;
 	margin: 0.5rem 0;
 	padding: 0.75em;
 	width: 100%;
+	min-height: 44px;
+} button:hover {
+	background-color: #2c2335;
 }
-.primary:hover {
-	background-color: dimgrey;
-}
-.secondary {
-	background-color: var(--white);
+
+.secondary,
+.tertiary {
+	background-color: floralwhite;
 	color: var(--black);
 }
 .secondary:hover {
-	background-color: #f3dfcd;
-	color: var(--black);
+	background-color: #f3f3f4;
 }
+
 .tertiary {
-	background-color: var(--white);
 	border: none;
-	color: var(--black);
+	font-weight: 400;
 	padding: 0;
 	text-decoration: underline;
 }
 .tertiary:hover {
-	color: var(--link);
+	background-color: floralwhite;
+	font-weight: 600;
 }
 
 main {
@@ -94,15 +89,21 @@ main {
 	grid-template-areas:
 		"arena"
 		"menu";
+} @media only screen and (min-width: 992px) {
+	main {
+		grid-template-columns: clamp(400px, 65vw, 1200px) auto;
+		grid-template-rows: clamp(700px, 100vh, 1200px);
+		grid-template-areas:
+			"arena menu";
+	}
 }
+
 .arena {
 	grid-area: arena;
 	background-color: darkseagreen;
 }
 .menu {
 	grid-area: menu;
-	background-color: var(--white);
-
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: auto minmax(min-content, max-content);
@@ -110,13 +111,23 @@ main {
 		"top"
 		"bottom";
 }
+
 .top {
 	grid-area: top;
-	padding: 1rem 1rem 0;
+	padding: 1rem 6.25%;
+} @media only screen and (min-width: 992px) {
+	.top {
+		padding: 6rem 2rem 0;
+	}
 }
+
 .bottom {
 	grid-area: bottom;
-	padding: 1rem;
+	padding: 1rem 6.25%;
+}	@media only screen and (min-width: 992px) {
+	.bottom {
+		padding: 1rem 2rem;
+	}
 }
 
 .debuffs {
@@ -128,6 +139,7 @@ main {
     "txt-hotcold . txt-brand life";
   font-weight: 500;
 	margin-bottom: 2rem;
+	text-align: center;
 }
 .intemp { grid-area: intemp; }
 .hotcold { grid-area: hotcold; }
@@ -137,7 +149,7 @@ main {
 #txt-brand { grid-area: txt-brand; margin: auto; }
 
 /* img svg media query */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
 	img, .life svg {
 		display: block;
 		margin: auto;
@@ -147,36 +159,26 @@ main {
 }
 
 #status {
-	border: 2px dotted black;
+	border: 2px dotted var(--black);
 	border-radius: 3px;
 	margin-bottom: 1rem;
 	padding: 1.5rem 1.5rem 2rem;
 }
 
-.hidden { display: none; }
-
 footer {
-	border-top: 2px double black;
-	font-size: var(--sm);
+	border-top: 1px solid var(--black);
+	font-size: 1rem;
+	margin: 1rem 5% 0;
 	padding: 0.5rem 1rem 1rem;
 	text-align: center;
 }
 
-@media only screen and (min-width: 768px) {
-	h2{
-		margin-top: 2rem;
-	}
+button:hover,
+input:hover,
+label:hover {
+	cursor: pointer;
+}
 
-	main {
-		grid-template-columns: clamp(400px, 65vw, 1200px) auto;
-		grid-template-rows: clamp(700px, 100vh, 1200px);
-		grid-template-areas:
-			"arena menu";
-	}
-	.top {
-		padding: 6rem 2rem 0;
-	}
-	.bottom {
-		padding: 1rem 2rem;
-	}
+.hidden {
+	display: none;
 }

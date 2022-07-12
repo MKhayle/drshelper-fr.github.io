@@ -1,6 +1,6 @@
 'use strict';
 var VIVI, ARENA, SPEED, timerHOTCOLD, timerBRAND, timerMECHANIC;
-const METERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
+const THERMOMETERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
 const SWORDS = ['swordn', 'sworde', 'swordw', 'swords'];
 
 class Vivi {
@@ -9,7 +9,7 @@ class Vivi {
     this.brand = brand;
     this.bodyTemp = hotcold;
 
-    this.position = 'tile12';
+    this.position = 'tile12'; // default
   }
 
   set position(tile) {
@@ -97,7 +97,7 @@ class Arena {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (resetTiles) {
-          clr = 'honeydew';
+          clr = 'ivory';
         } else {
           hit = hits[j][i];
           if (hit === 0) {
@@ -141,7 +141,7 @@ class Arena {
     move('meter' + meter[1], 113, 66);
     move('meter' + meter[2], 33, 66);
     move('meter' + meter[3], 73, 106);
-    showAll(METERS);
+    showAll(THERMOMETERS);
   }
 
   swords(phase) {
@@ -194,14 +194,14 @@ class Arena {
   }
 
   hideSwords() {
-    hideAll(METERS);
+    hideAll(THERMOMETERS);
     hideAll(SWORDS);
     hide('tilesafe' + this.safe1);
     hide('tilesafe' + this.safe2);
   }
 
   setOrients(safe) {
-    const getOrient = (safe1, safe2) => (safe === safe1 || safe === safe2) ? getRand('n', 's') : getRand('e', 'w');
+    const getOrient = (safe1, safe2) => (safe === safe1 || safe === safe2) ? getRandItem(['n', 's']) : getRandItem(['e', 'w']);
     let n = getOrient(3, 4),
         e = getOrient(2, 3),
         w = getOrient(1, 4),
@@ -287,17 +287,17 @@ function setPractice() {
     return arr;
   }
 
-  hotcold = getRand(...TEMPS);
+  hotcold = getRandItem(TEMPS);
   if (sessionStorage.getItem('formGetBrand')) {
-    brand = getRand(...TEMPS);
+    brand = getRandItem(TEMPS);
     while (hotcold + brand === 0)
-      brand = getRand(...TEMPS);
+      brand = getRandItem(TEMPS);
   }
 
-  safe1 = getRand(...SAFES);
-  safe2 = getRand(...SAFES);
+  safe1 = getRandItem(SAFES);
+  safe2 = getRandItem(SAFES);
   while (safe1 === safe2)
-    safe2 = getRand(...SAFES);
+    safe2 = getRandItem(SAFES);
 
   meters1 = shuffle(TEMPS);
   do {
@@ -325,13 +325,11 @@ function startPractice() {
   addOptions();
   show('bosse');
   if (sessionStorage.getItem('formUseTimer')) {
-    SPEED = 1000; // will depend on settings;
+    SPEED = 1000; // TO-DO: will depend on settings;
     startMechanic('Hot and Cold');
   } else {
     SPEED = 1000;
-    show('btnResolveSwords1');
-    show('dbf-intemp');
-    show('dbf-eb' + VIVI.brand);
+    showAll(['btnResolveSwords1', 'dbf-intemp', 'dbf-eb' + VIVI.brand]);
     VIVI.showLife(VIVI.bodyTemp);
     levelTemp(VIVI.hotcold);
     ARENA.showClones();
@@ -522,7 +520,13 @@ function editSettings() {
   location.reload();
 }
 
-function getRand(...args) { return args[Math.floor(Math.random() * args.length)]; }
+function getRandItem(array) {
+  let index = Math.floor(Math.random() * array.length);
+  return array[index];
+}
+
+
+
 function checkForm(form) { d3.select('#' + form).property('checked', sessionStorage.getItem(form) ? true : false); }
 function move(elem, x, y) { d3.select('#' + elem).attr('transform', 'translate(' + x + ', ' + y + ')'); }
 
@@ -535,6 +539,11 @@ function hideAll(array) {
 function showAll(array) {
   for (let a of array)
     show(a);
+}
+
+function hide2(...elements) {
+  for (let elem of elements)
+    d3.select('#' + elem).classed("hidden", true);
 }
 
 function updateStatus(status = '&nbsp;') { write('status', status); }
