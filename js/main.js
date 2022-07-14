@@ -40,12 +40,12 @@ class Vivi {
     let x = this.x,
         y = this.y;
 
-    if (ARENA['hits' + phase][y][x] > 1) {
+    if (ARENA[`hits${phase}`][y][x] > 1) {
       this.dead('You got hit by two swords at once!');
       this.bodyTemp = 100;
     }
     else
-      this.check(ARENA['temps' + phase][y][x]);
+      this.check(ARENA[`temps${phase}`][y][x]);
   }
 
   check(temp) {
@@ -65,13 +65,11 @@ class Vivi {
   }
   
   showLife(temp) {
-    let body = this.bodyTemp;
-
     show('ta-life');
-    hide('dbf-hc' + body);
-    hide('life' + body);
-    show('dbf-hc' + temp);
-    show('life' + temp);
+    hide(`dbf-hc${this.bodyTemp}`);
+    hide(`life${this.bodyTemp}`);
+    show(`dbf-hc${temp}`);
+    show(`life${temp}`);
   }
 }
 
@@ -92,21 +90,20 @@ class Arena {
   }
   
   colorTiles(phase, resetTiles = false) {
-    let hits = this['hits' + phase], hit, clr;
+    let hits = this[`hits${phase}`], hit, color;
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (resetTiles) {
-          clr = 'ivory';
+          color = 'ivory';
         } else {
           hit = hits[j][i];
-          if (hit === 0) {
+          if (hit === 0)
             continue;
-          } else {
-            clr = (hit === 2) ? 'sandybrown' : '#fad2b0';
-          }
+          else
+            color = (hit === 2) ? 'sandybrown' : 'blanchedalmond';
         }
-        d3.select('#bg' + i + j).style('fill', clr);
+        d3.select(`#bg${i}${j}`).style('fill', color);
       }
     }
 
@@ -120,7 +117,7 @@ class Arena {
   }
   
   rotateBosses(phase) {
-    let deg, orients = this['orients' + phase];
+    let deg, orients = this[`orients${phase}`];
     let bosses = ['n', 'e', 'w', 's'];
 
     for (let i = 0; i < bosses.length; i++) {
@@ -131,22 +128,22 @@ class Arena {
         case 's':
         default: deg = 0;
       }
-      d3.select('#face' + bosses[i]).attr('transform', 'translate(17, 17) rotate(' + deg + ') translate(-17, -17)');   
+      d3.select(`#face${bosses[i]}`).attr('transform', `translate(17, 17) rotate(${deg}) translate(-17, -17)`);   
     }
   }
 
   meters(phase) {
-    let meter = this['meters' + phase];
-    move('meter' + meter[0], 73, 26);
-    move('meter' + meter[1], 113, 66);
-    move('meter' + meter[2], 33, 66);
-    move('meter' + meter[3], 73, 106);
+    let meter = this[`meters${phase}`];
+    move(`meter${meter[0]}`, 73, 26);
+    move(`meter${meter[1]}`, 113, 66);
+    move(`meter${meter[2]}`, 33, 66);
+    move(`meter${meter[3]}`, 73, 106);
     showAll(THERMOMETERS);
   }
 
   swords(phase) {
-    let swd = this['swords' + phase];
-    let meter = this['meters' + phase];
+    let swd = this[`swords${phase}`];
+    let meter = this[`meters${phase}`];
     let x, y;
 
     switch(swd.indexOf('swordn')) {
@@ -178,7 +175,7 @@ class Arena {
     move('swords', x, y);
 
     for (let i = 0; i < SWORDS.length; i++) {
-      d3.select('#' + swd[i]).styles({
+      d3.select(`#${swd[i]}`).styles({
         fill: (meter[i] > 0) ? '#f08080' : '#87cefa',
         stroke: (meter[i] > 0) ? '#531515' : '#4668a6'
       });
@@ -190,14 +187,13 @@ class Arena {
     this.meters(phase);
     this.swords(phase);
     if (sessionStorage.getItem('formMarkSafe'))
-      show('tilesafe' + this['safe' + phase]);
+      show(`tilesafe${this[`safe${phase}`]}`);
   }
 
   hideSwords() {
     hideAll(THERMOMETERS);
     hideAll(SWORDS);
-    hide('tilesafe' + this.safe1);
-    hide('tilesafe' + this.safe2);
+    hideAll([`tilesafe${this.safe1}`, `tilesafe${this.safe2}`]);
   }
 
   setOrients(safe) {
@@ -262,7 +258,7 @@ class Arena {
 
 function setSettings() {
   function checkStorage(form) {
-    if (d3.select('#' + form).property('checked')) 
+    if (d3.select(`#${form}`).property('checked')) 
       sessionStorage.setItem(form, 'true');
     else 
       sessionStorage.removeItem(form);
@@ -329,7 +325,7 @@ function startPractice() {
     startMechanic('Hot and Cold');
   } else {
     SPEED = 1000;
-    showAll(['btnResolveSwords1', 'dbf-intemp', 'dbf-eb' + VIVI.brand]);
+    showAll(['btnResolveSwords1', 'dbf-intemp', `dbf-eb${VIVI.brand}`]);
     VIVI.showLife(VIVI.bodyTemp);
     levelTemp(VIVI.hotcold);
     ARENA.showClones();
@@ -368,12 +364,11 @@ function resolveSwords2() {
 }
 
 function resolveBrand() {
-  let brand = VIVI.brand;
   hide('btnResolveBrand');
 
   ARENA.hideClones();
-  VIVI.check(brand);
-  hide('dbf-eb' + brand);
+  VIVI.check(VIVI.brand);
+  hide(`dbf-eb${VIVI.brand}`);
   if (VIVI.bodyTemp === 0) {
     VIVI.win();
   } else {
@@ -444,7 +439,7 @@ function startTimerBrand() {
   const updateTimer = (newTime = '&nbsp;') => write('txt-brand', newTime);
 
   updateTimer(time);
-  show('dbf-eb' + brand);
+  show(`dbf-eb${brand}`);
 
   timerBRAND = setInterval(function() {
     time--;
@@ -455,13 +450,13 @@ function startTimerBrand() {
       updateTimer();
       VIVI.check(brand);
       if (VIVI.bodyTemp >= -2 || VIVI.bodyTemp <= 2) 
-        hide('dbf-eb' + brand);
+        hide(`dbf-eb${brand}`);
     }
   }, SPEED);
 }
 
 function startMechanic(mechanic, time = 4) {
-  let cast = 'Casting <b>' + mechanic + '</b> in... ';
+  let cast = `Casting <b>${mechanic}</b> in... `;
 
   updateStatus(cast + time);
   timerMECHANIC = setInterval(function() {
@@ -505,7 +500,7 @@ function removeOptions() { options(null); }
 function options(func) {
   for (let x = 0; x < 4; x++) {
     for (let y = 0; y < 4; y++) {
-      d3.select('#tile' + x + y).on('click', func);
+      d3.select(`#tile${x}${y}`).on('click', func);
     }
   }
 }
@@ -527,11 +522,11 @@ function getRandItem(array) {
 
 
 
-function checkForm(form) { d3.select('#' + form).property('checked', sessionStorage.getItem(form) ? true : false); }
-function move(elem, x, y) { d3.select('#' + elem).attr('transform', 'translate(' + x + ', ' + y + ')'); }
+function checkForm(form) { d3.select(`#${form}`).property('checked', sessionStorage.getItem(form) ? true : false); }
+function move(element, x, y) { d3.select(`#${element}`).attr('transform', `translate(${x}, ${y})`); }
 
-function hide(elem) { d3.select('#' + elem).classed("hidden", true); }
-function show(elem) { d3.select('#' + elem).classed("hidden", false); }
+function hide(element) { d3.select(`#${element}`).classed('hidden', true); }
+function show(element) { d3.select(`#${element}`).classed('hidden', false); }
 function hideAll(array) {
   for (let a of array)
     hide(a);
@@ -541,28 +536,23 @@ function showAll(array) {
     show(a);
 }
 
-function hide2(...elements) {
-  for (let elem of elements)
-    d3.select('#' + elem).classed("hidden", true);
-}
-
 function updateStatus(status = '&nbsp;') { write('status', status); }
-function write(elem, text = '&nbsp;') {
-  d3.select('#' + elem).html(text);
+function write(element, text = '&nbsp;') {
+  d3.select(`#${element}`).html(text);
 }
 
 function levelTemp(temp) {
 	let level;
 
 	switch(temp) {
-		case 0: updateStatus(); return;
-		case -2: level = 'falls 2 levels.'; break;
-		case -1: level = 'falls 1 level.'; break;
-		case 1: level = 'rises 1 level.'; break;
+		case 0: updateStatus(); return; // writes nothing
+		case -2: level = 'falls 2 levels'; break;
+		case -1: level = 'falls 1 level'; break;
+		case 1: level = 'rises 1 level'; break;
 		case 2:
-		default: level = 'rises 2 levels.';
+		default: level = 'rises 2 levels';
 	}
-	updateStatus('<i>Your body temperature ' + level + '</i>');
+	updateStatus(`<i>Your body temperature ${level}.</i>`);
 }
 
 window.onload = function() {
