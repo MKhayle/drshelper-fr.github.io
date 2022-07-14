@@ -54,13 +54,13 @@ class Vivi {
     if (newBody > 2 || newBody < -2) {
       this.bodyTemp = newBody;
       if (newBody > 2)
-        this.dead('Your body went above 2 levels and burned to death!');
+        this.dead('Your body temperature went above 2 levels and burned to death!');
       else
-        this.dead('Your body went below 2 levels and froze to death!');
+        this.dead('Your body temperature went below 2 levels and froze to death!');
     } else {
       this.showLife(newBody);
       this.bodyTemp = newBody;
-      levelTemp(temp);
+      writeTempChange(temp);
     }
   }
   
@@ -101,7 +101,7 @@ class Arena {
           if (hit === 0)
             continue;
           else
-            color = (hit === 2) ? 'sandybrown' : 'blanchedalmond';
+            color = (hit === 2) ? 'sandybrown' : 'peachpuff';
         }
         d3.select(`#bg${i}${j}`).style('fill', color);
       }
@@ -274,14 +274,6 @@ function setPractice() {
   let hotcold, brand = 0, safe1, safe2, meters1, meters2, isSame;
   const TEMPS = [-2, -1, 1, 2];
   const SAFES = [1, 2, 3, 4];
-  const shuffle = array => {
-    let arr = array.slice();
-    for (let i = arr.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
 
   hotcold = getRandItem(TEMPS);
   if (sessionStorage.getItem('formGetBrand')) {
@@ -327,7 +319,7 @@ function startPractice() {
     SPEED = 1000;
     showAll(['btnResolveSwords1', 'dbf-intemp', `dbf-eb${VIVI.brand}`]);
     VIVI.showLife(VIVI.bodyTemp);
-    levelTemp(VIVI.hotcold);
+    writeTempChange(VIVI.hotcold);
     ARENA.showClones();
     ARENA.rotateBosses(1);
     ARENA.showSwords(1);
@@ -478,7 +470,7 @@ function startMechanic(mechanic, time = 4) {
           startTimerHotCold();
           show('dbf-intemp');
           VIVI.showLife(VIVI.bodyTemp);
-          levelTemp(VIVI.hotcold);
+          writeTempChange(VIVI.hotcold);
           break;
       }
       clearInterval(timerMECHANIC);
@@ -515,16 +507,22 @@ function editSettings() {
   location.reload();
 }
 
+
 function getRandItem(array) {
   let index = Math.floor(Math.random() * array.length);
   return array[index];
 }
 
+function shuffle(array) {
+  let arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
-
-function checkForm(form) { d3.select(`#${form}`).property('checked', sessionStorage.getItem(form) ? true : false); }
 function move(element, x, y) { d3.select(`#${element}`).attr('transform', `translate(${x}, ${y})`); }
-
 function hide(element) { d3.select(`#${element}`).classed('hidden', true); }
 function show(element) { d3.select(`#${element}`).classed('hidden', false); }
 function hideAll(array) {
@@ -536,23 +534,27 @@ function showAll(array) {
     show(a);
 }
 
-function updateStatus(status = '&nbsp;') { write('status', status); }
+function updateStatus(status = '&nbsp;') {
+  write('status', status);
+}
 function write(element, text = '&nbsp;') {
   d3.select(`#${element}`).html(text);
 }
 
-function levelTemp(temp) {
-	let level;
+function writeTempChange(temp) {
+  let text, change, plural;
+  if (temp !== 0) {
+    change = (temp < 0) ? 'falls' : 'rises';
+    temp = Math.abs(temp);
+    plural = (temp > 1) ? 's' : '';  
+    text = `<i>Your body temperature ${change} ${temp} level${plural}.</i>`;
+  }
+  updateStatus(text);
+}
 
-	switch(temp) {
-		case 0: updateStatus(); return; // writes nothing
-		case -2: level = 'falls 2 levels'; break;
-		case -1: level = 'falls 1 level'; break;
-		case 1: level = 'rises 1 level'; break;
-		case 2:
-		default: level = 'rises 2 levels';
-	}
-	updateStatus(`<i>Your body temperature ${level}.</i>`);
+function checkForm(form) {
+  let isChecked = sessionStorage.getItem(form) ? true : false;
+  d3.select(`#${form}`).property('checked', isChecked);
 }
 
 window.onload = function() {
