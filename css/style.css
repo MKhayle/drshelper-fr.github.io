@@ -136,7 +136,7 @@ main {
 .debuffs {
 	display: grid;
 	grid-template-columns: 15% 15% 15% 55%;
-	grid-template-rows: 4.5rem 2rem;
+	grid-template-rows: auto auto;
   grid-template-areas:
     "intemp hotcold brand life"
     "txt-hotcold . txt-brand life";
@@ -193,3 +193,13 @@ label:hover {
 .hidden {
 	display: none;
 }
+/*
+.additional {
+	margin-left: 1.5rem;
+}
+
+.disabled {
+	opacity: 0.6;
+	text-decoration: line-through;
+}
+*/
