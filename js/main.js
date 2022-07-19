@@ -267,6 +267,7 @@ function setSettings() {
   checkStorage('formUseTimer');
   checkStorage('formMarkSafe');
   checkStorage('formGetBrand');
+  checkStorage('formSkipDebuffs');
   startPractice();
 }
 
@@ -313,8 +314,16 @@ function startPractice() {
   addOptions();
   show('bosse');
   if (sessionStorage.getItem('formUseTimer')) {
-    SPEED = 1000; // TO-DO: will depend on settings;
-    startMechanic('Hot and Cold');
+    SPEED = 1000; // TO-DO: will depend on settings
+    if (sessionStorage.getItem('formSkipDebuffs')) {
+      startTimerBrand();
+      startTimerHotCold();
+      showAll(['dbf-intemp', `dbf-eb${VIVI.brand}`]);
+      VIVI.showLife(VIVI.bodyTemp);
+    }
+    else {
+      startMechanic('Hot and Cold');
+    }
   } else {
     SPEED = 1000;
     showAll(['btnResolveSwords1', 'dbf-intemp', `dbf-eb${VIVI.brand}`]);
@@ -370,6 +379,7 @@ function resolveBrand() {
 
 function startTimerHotCold() {
   let time = (VIVI.brand === 0) ? 42 : 49;
+  if (sessionStorage.getItem('formSkipDebuffs')) time = 39;
   const updateTimer = (newTime = '&nbsp;') => write('txt-hotcold', newTime);
 
   updateTimer(time);
@@ -427,6 +437,7 @@ function startTimerHotCold() {
 
 function startTimerBrand() {
   let time = 38;
+  if (sessionStorage.getItem('formSkipDebuffs')) time = 35;
   let brand = VIVI.brand;
   const updateTimer = (newTime = '&nbsp;') => write('txt-brand', newTime);
 
@@ -567,6 +578,7 @@ window.onload = function() {
       checkForm('formUseTimer');
       checkForm('formMarkSafe');
       checkForm('formGetBrand');
+      checkForm('formSkipDebuffs');
     }
     sessionStorage.clear();
     show('settings');

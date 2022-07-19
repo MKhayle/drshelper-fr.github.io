@@ -37,22 +37,28 @@
 						<p>Simulator to practise Trinity Avowed’s Swords phase in <i>Final Fantasy XIV’s</i> Delubrum Reginae (Savage) raid.</p>
 
 						<h2>Settings</h2>
-						<input type="checkbox" id="formUseTimer" name="formUseTimer" checked>
-						<label for="formUseTimer">Practise with a timer</label>
+						<label>
+							<input type="checkbox" id="formUseTimer" checked>
+							Practise with a timer
+						</label>
 						<br>
-						
-						<input type="checkbox" id="formMarkSafe" name="formMarkSafe" checked>
-						<label for="formMarkSafe">Mark the safe spot</label>
+						<label>
+							<input type="checkbox" id="formSkipDebuffs" class="additional">
+							Get debuffs immediately (skips cast)
+						</label>
 						<br>
 
-						<input type="checkbox" id="formGetBrand" name="formGetBrand" checked>
-						<label for="formGetBrand">Get an <b>Elemental Brand</b> debuff</label>
+						<label>
+							<input type="checkbox" id="formMarkSafe" checked>
+							Mark the safe spot
+						</label>
 						<br>
-					<!--
-						<input type="checkbox" id="formSkipDebuffs" name="formSkipDebuffs" checked>
-						<label for="formSkipDebuffs">Get debuffs immediately (fast-forwards to <b>Unwavering Apparition</b>)</label>
+
+						<label>
+							<input type="checkbox" id="formGetBrand" checked>
+							Get an <b>Elemental Brand</b> debuff
+						</label>
 						<br>
-					-->
 					</div>
 
 					<div id="info" class="hidden">
@@ -129,7 +135,7 @@
 							</div>
 						</div>
 
-						<p id="status"></p>
+						<p id="status">&nbsp;</p>
 					</div>
 				</div>
 
