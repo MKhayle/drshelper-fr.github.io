@@ -316,7 +316,7 @@ function startPractice() {
   if (sessionStorage.getItem('formUseTimer')) {
     SPEED = 1000; // TO-DO: will depend on settings
     if (sessionStorage.getItem('formSkipDebuffs')) {
-      startTimerBrand();
+      if (sessionStorage.getItem('formGetBrand')) startTimerBrand();
       startTimerHotCold();
       showAll(['dbf-intemp', `dbf-eb${VIVI.brand}`]);
       VIVI.showLife(VIVI.bodyTemp);
