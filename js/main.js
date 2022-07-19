@@ -2,6 +2,8 @@
 var VIVI, ARENA, SPEED, timerHOTCOLD, timerBRAND, timerMECHANIC;
 const THERMOMETERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
 const SWORDS = ['swordn', 'sworde', 'swordw', 'swords'];
+const TEMPERATURES = [-2, -1, 1, 2];
+const SAFE_SPOTS = [1, 2, 3, 4];
 
 class Vivi {
   constructor(hotcold, brand) {
@@ -256,7 +258,7 @@ class Arena {
   }
 }
 
-function setSettings() {
+function saveSettings() {
   function checkStorage(form) {
     if (d3.select(`#${form}`).property('checked')) 
       sessionStorage.setItem(form, 'true');
@@ -273,26 +275,24 @@ function setSettings() {
 
 function setPractice() {
   let hotcold, brand = 0, safe1, safe2, meters1, meters2, isSame;
-  const TEMPS = [-2, -1, 1, 2];
-  const SAFES = [1, 2, 3, 4];
 
-  hotcold = getRandItem(TEMPS);
+  hotcold = getRandItem(TEMPERATURES);
   if (sessionStorage.getItem('formGetBrand')) {
-    brand = getRandItem(TEMPS);
+    brand = getRandItem(TEMPERATURES);
     while (hotcold + brand === 0)
-      brand = getRandItem(TEMPS);
+      brand = getRandItem(TEMPERATURES);
   }
 
-  safe1 = getRandItem(SAFES);
-  safe2 = getRandItem(SAFES);
+  safe1 = getRandItem(SAFE_SPOTS);
+  safe2 = getRandItem(SAFE_SPOTS);
   while (safe1 === safe2)
-    safe2 = getRandItem(SAFES);
+    safe2 = getRandItem(SAFE_SPOTS);
 
-  meters1 = shuffle(TEMPS);
+  meters1 = shuffle(TEMPERATURES);
   do {
     isSame = false;
-    meters2 = shuffle(TEMPS);
-    for (let i = 0; i < TEMPS.length; i++) {
+    meters2 = shuffle(TEMPERATURES);
+    for (let i = 0; i < TEMPERATURES.length; i++) {
       if (meters1[i] === meters2[i]) {
         isSame = true; break;
       }
@@ -370,11 +370,10 @@ function resolveBrand() {
   ARENA.hideClones();
   VIVI.check(VIVI.brand);
   hide(`dbf-eb${VIVI.brand}`);
-  if (VIVI.bodyTemp === 0) {
+  if (VIVI.bodyTemp === 0)
     VIVI.win();
-  } else {
+  else 
     VIVI.dead();
-  }
 }
 
 function startTimerHotCold() {
@@ -499,7 +498,10 @@ function addOptions() {
 
   options(clickTile);
 }
-function removeOptions() { options(null); }
+function removeOptions() {
+  options(null);
+}
+
 function options(func) {
   for (let x = 0; x < 4; x++) {
     for (let y = 0; y < 4; y++) {
@@ -563,10 +565,20 @@ function writeTempChange(temp) {
   updateStatus(text);
 }
 
-function checkForm(form) {
-  let isChecked = sessionStorage.getItem(form) ? true : false;
-  d3.select(`#${form}`).property('checked', isChecked);
+function recheckForm(form) {
+  let isStored = sessionStorage.getItem(form) ? true : false;
+  d3.select(`#${form}`).property('checked', isStored);
 }
+
+function addFuncToBtn(func, button) {
+  return d3.select(`#btn${button}`).on('click', func);
+}
+addFuncToBtn(saveSettings, 'StartPractice');
+addFuncToBtn(resolveSwords1, 'ResolveSwords1');
+addFuncToBtn(resolveSwords2, 'ResolveSwords2');
+addFuncToBtn(resolveBrand, 'ResolveBrand');
+addFuncToBtn(practiseAgain, 'PractiseAgain');
+addFuncToBtn(editSettings, 'EditSettings');
 
 window.onload = function() {
   if (sessionStorage.getItem('practiseAgain')) {
@@ -575,10 +587,10 @@ window.onload = function() {
   } else {
     if (sessionStorage.getItem('editSettings')) {
       sessionStorage.removeItem('editSettings');
-      checkForm('formUseTimer');
-      checkForm('formMarkSafe');
-      checkForm('formGetBrand');
-      checkForm('formSkipDebuffs');
+      recheckForm('formUseTimer');
+      recheckForm('formMarkSafe');
+      recheckForm('formGetBrand');
+      recheckForm('formSkipDebuffs');
     }
     sessionStorage.clear();
     show('settings');
