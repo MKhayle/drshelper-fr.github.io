@@ -24,6 +24,8 @@ body {
 	font-family: 'Public Sans', sans-serif;
 	font-size: 1rem;
 	line-height: 1.4em;
+	margin: 0 auto;
+	max-width: 1500px;
 } @media only screen and (min-width: 992px) {
 	body, button {
 		font-size: var(--body);
@@ -94,8 +96,8 @@ main {
 		"menu";
 } @media only screen and (min-width: 992px) {
 	main {
-		grid-template-columns: clamp(400px, 65vw, 1200px) auto;
-		grid-template-rows: clamp(700px, 100vh, 1200px);
+		grid-template-columns: auto clamp(350px, 35%, 600px);
+		grid-template-rows: clamp(700px, 100vh, 925px);
 		grid-template-areas:
 			"arena menu";
 	}
@@ -145,13 +147,13 @@ main {
 	text-align: center;
 } @media only screen and (min-width: 992px) {
 	.debuffs {
-		margin-bottom: 2rem;
+		margin: 0 0.5rem 2rem;
 	}
 }
 .intemp { grid-area: intemp; }
 .hotcold { grid-area: hotcold; }
 .brand { grid-area: brand; }
-.life { grid-area: life; }
+.life { grid-area: life; padding-left: 1.5rem; }
 #txt-hotcold { grid-area: txt-hotcold; margin: auto; }
 #txt-brand { grid-area: txt-brand; margin: auto; }
 
