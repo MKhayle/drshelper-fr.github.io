@@ -1,9 +1,17 @@
 'use strict';
 var VIVI, ARENA, SPEED, timerHOTCOLD, timerBRAND, timerMECHANIC;
-const THERMOMETERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
+const ARENA_LENGTH = 4;
+const FORMS = ['formUseTimer', 'formMarkSafe', 'formGetBrand', 'formSkipDebuffs']
+const SAFE_SPOTS = [1, 2, 3, 4];
 const SWORDS = ['swordn', 'sworde', 'swordw', 'swords'];
 const TEMPERATURES = [-2, -1, 1, 2];
-const SAFE_SPOTS = [1, 2, 3, 4];
+const THERMOMETERS = ['meter-2', 'meter-1', 'meter1', 'meter2'];
+const TILES = [
+  'tile00', 'tile10', 'tile20', 'tile30',
+  'tile01', 'tile11', 'tile21', 'tile31',
+  'tile02', 'tile12', 'tile22', 'tile32',
+  'tile03', 'tile13', 'tile23', 'tile33'
+];
 
 class Vivi {
   constructor(hotcold, brand) {
@@ -259,17 +267,13 @@ class Arena {
 }
 
 function saveSettings() {
-  function checkStorage(form) {
-    if (d3.select(`#${form}`).property('checked')) 
-      sessionStorage.setItem(form, 'true');
-    else 
-      sessionStorage.removeItem(form);
-  }
+  const isChecked = form => d3.select(`#${form}`).property('checked');
+  const store = form => sessionStorage.setItem(form, 'true');
 
-  checkStorage('formUseTimer');
-  checkStorage('formMarkSafe');
-  checkStorage('formGetBrand');
-  checkStorage('formSkipDebuffs');
+  sessionStorage.clear();
+  for (let form of FORMS) {
+    if (isChecked(form)) store(form);
+  }  
   startPractice();
 }
 
@@ -490,24 +494,18 @@ function startMechanic(mechanic, time = 4) {
   }, SPEED);
 }
 
-function addOptions() {
-  function clickTile() {
-    VIVI.position = this.id;
-    move('vivi-ans', VIVI.x * 40 + 18, VIVI.y * 40 + 16);
-  }
 
-  options(clickTile);
-}
-function removeOptions() {
-  options(null);
+
+function clickTile() {
+  VIVI.position = this.id;
+  move('vivi-ans', VIVI.x * 40 + 18, VIVI.y * 40 + 16);
 }
 
+function addOptions() { options(clickTile); }
+function removeOptions() { options(null); }
 function options(func) {
-  for (let x = 0; x < 4; x++) {
-    for (let y = 0; y < 4; y++) {
-      d3.select(`#tile${x}${y}`).on('click', func);
-    }
-  }
+  for (let tile of TILES)
+    d3.select(`#${tile}`).on('click', func);
 }
 
 function practiseAgain() {
@@ -522,8 +520,8 @@ function editSettings() {
 
 
 function getRandItem(array) {
-  let index = Math.floor(Math.random() * array.length);
-  return array[index];
+  let randIndex = Math.floor(Math.random() * array.length);
+  return array[randIndex];
 }
 
 function shuffle(array) {
@@ -592,7 +590,6 @@ window.onload = function() {
       recheckForm('formGetBrand');
       recheckForm('formSkipDebuffs');
     }
-    sessionStorage.clear();
     show('settings');
   }
 };
