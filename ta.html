@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8">
 		<meta name="author" content="Renzo Carlos">
-		<meta name="description" content="Simulator to practise Trinity Avowed’s Swords phase in FFXIV’s Delubrum Reginae (Savage).">
-		<meta name="keywords" content="ffxiv delubrum reginae savage trinity avowed practice, ffxiv drs ta swords, ffxiv drs ta, ffxiv delubrum reginae savage, ffxiv trinity avowed swords">
+		<meta name="description" content="Simulateur pour s'entraîner sur la mécanique des épées de la Trinité Féale dans Delubrum Reginae (Sadique) sur FFXIV.">
+		<meta name="keywords" content="ffxiv delubrum reginae sadique trinité féale entraînement, ffxiv drs féale épées, ffxiv drs féale, ffxiv delubrum reginae savage, ffxiv trinité féale épées">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,37 +26,37 @@
 			gtag('config', 'G-58JNVGWZWB');
 		</script>
 
-		<title>Trinity Avowed (Savage) Swords Practice</title>
+		<title>Simulateur pour les épées de Trinité Féale (Sadique)</title>
 	</head>
 	<body>
 		<main>
 			<div class="menu">
 				<div class="top">
 					<div id="settings" class="hidden">
-						<h1>DRS TA Swords Practice</h1>
-						<p>Simulator to practise Trinity Avowed’s Swords phase in <i>Final Fantasy XIV’s</i> Delubrum Reginae (Savage) raid.</p>
+						<h1>DRS Simulateur pour les épées de Trinité Féale</h1>
+						<p>Simulateur pour s'entraîner sur la phase des épées de la Trinité Féale dans le raid Delubrum Reginae (sadique) sur <em>FFXIV</em>.</p>
 
-						<h2>Settings</h2>
+						<h2>Paramètres</h2>
 						<label>
 							<input type="checkbox" id="formUseTimer" checked>
-							Practise with a timer
+							S'entraîner avec un minuteur
 						</label>
 						<br>
 						<label>
 							<input type="checkbox" id="formSkipDebuffs" class="additional">
-							Get debuffs immediately (skips cast)
+							Obtenir les débuffs immediatement (skip les casts)
 						</label>
 						<br>
 
 						<label>
 							<input type="checkbox" id="formMarkSafe" checked>
-							Mark the safe spot
+							Montrer le safe spot
 						</label>
 						<br>
 
 						<label>
 							<input type="checkbox" id="formGetBrand" checked>
-							Get an <b>Elemental Brand</b> debuff
+							Obtenir le débuff de <b>Malédiction élémentaire</b> (2nde phase)
 						</label>
 						<br>
 					</div>
@@ -64,21 +64,21 @@
 					<div id="info" class="hidden">
 						<div class="debuffs">
 							<div class="intemp">
-								<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Intemperate" title="Intemperate&#010;&#10;Easily affected by changes in body temperature. When effect expires, running hot or cold will result in K.O." width="100%">
+								<img id="dbf-intemp" class="hidden" src="img/intemp.png" alt="Température instable" title="Température instable&#010;&#10;La température est instable. Rend inconscient si elle ne retourne pas à la normale avant la fin de l'effet." width="100%">
 								<p id="txt-hotcold"></p>
 							</div>
 							<div class="hotcold">
-								<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Normal" title="Normal&#010;&#010;Maintaining an average body temperature." width="100%">
-								<img id="dbf-hc-2" class="hidden" src="img/cold2.png" alt="Running Cold: -2" title="Running Cold: -2&#010;&#010;Body temperature has dropped to 1 level below normal." width="100%">
-								<img id="dbf-hc-1" class="hidden" src="img/cold1.png" alt="Running Cold: -1" title="Running Cold: -1&#010;&#010;Body temperature has dropped to 2 levels below normal." width="100%">
-								<img id="dbf-hc1" class="hidden" src="img/hot1.png" alt="Running Hot: +1" title="Running Hot: +1&#010;&#010;Body temperature has risen to 1 level above normal." width="100%">
-								<img id="dbf-hc2" class="hidden" src="img/hot2.png" alt="Running Hot: +2" title="Running Hot: +2&#010;&#010;Body temperature has risen to 2 levels above normal." width="100%">
+								<img id="dbf-hc0" class="hidden" src="img/neutral.png" alt="Température normale" title="Température normale&#010;&#010;La température du corps est normale." width="100%">
+								<img id="dbf-hc-2" class="hidden" src="img/cold2.png" alt="Température -2" title="Température -2&#010;&#010;La température du corps est grandement inférieure à la normale.." width="100%">
+								<img id="dbf-hc-1" class="hidden" src="img/cold1.png" alt="Température -1" title="Température -1&#010;&#010;La température du corps est inférieure à la normale." width="100%">
+								<img id="dbf-hc1" class="hidden" src="img/hot1.png" alt="Température +1" title="Température +1&#010;&#010;La température du corps est supérieure à la normale." width="100%">
+								<img id="dbf-hc2" class="hidden" src="img/hot2.png" alt="Température +2" title="Température +2&#010;&#010;La température du corps est grandement supérieure à la normale." width="100%">
 							</div>
 							<div class="brand">
-								<img id="dbf-eb-2" class="hidden" src="img/ice2.png" alt="Cold Brand: -2" title="Cold Brand: -2&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 1 level when this effect expires." width="100%">
-								<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Cold Brand: -1" title="Cold Brand: -1&#010;&#010;Bearing a chill-inducing brand. Body temperature will decrease by 2 levels when this effect expires." width="100%">
-								<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Hot Brand: +1&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 1 level when this effect expires." width="100%">
-								<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Hot Brand: +2&#010;&#010;Bearing a fever-inducing brand. Body temperature will increase by 2 levels when this effect expires." width="100%">
+								<img id="dbf-eb-2" class="hidden" src="img/ice2.png" alt="Malédiction glaciale -2" title="Cold Brand: -2&#010;&#010;Une malédiction altère lentement la température du corps. Cette dernière diminue à la fin de l'effet." width="100%">
+								<img id="dbf-eb-1" class="hidden" src="img/ice1.png" alt="Malédiction glaciale -1" title="Cold Brand: -1&#010;&#010;Une malédiction altère lentement la température du corps. Cette dernière diminue grandement à la fin de l'effet." width="100%">
+								<img id="dbf-eb1" class="hidden" src="img/fire1.png" alt="Hot Brand: +1" title="Malédiction ardente +1&#010;&#010;Une malédiction altère lentement la température du corps. Cette dernière augmente à la fin de l'effet." width="100%">
+								<img id="dbf-eb2" class="hidden" src="img/fire2.png" alt="Hot Brand: +2" title="Malédiction ardente +2&#010;&#010;Une malédiction altère lentement la température du corps. Cette dernière augmente grandement à la fin de l'effet." width="100%">
 								<p id="txt-brand"></p>
 							</div>
 							<div class="life">
@@ -140,12 +140,12 @@
 				</div>
 
 				<div class="bottom">
-					<button id="btnStartPractice">Start Practice</button>
-					<button id="btnResolveSwords1" class="hidden">Resolve Swords #1</button>
-					<button id="btnResolveSwords2" class="hidden">Resolve Swords #2</button>
-					<button id="btnResolveBrand" class="hidden">Resolve Brand</button>
-					<button id="btnPractiseAgain" class="secondary hidden">Reset Practice</button>
-					<button id="btnEditSettings" class="tertiary hidden">Change Settings</button>
+					<button id="btnStartPractice">Commencer</button>
+					<button id="btnResolveSwords1" class="hidden">Résolution des premières Épées</button>
+					<button id="btnResolveSwords2" class="hidden">Résolution des secondes Épées</button>
+					<button id="btnResolveBrand" class="hidden">Résolution de votre Malédiction</button>
+					<button id="btnPractiseAgain" class="secondary hidden">Recommencer la simulation</button>
+					<button id="btnEditSettings" class="tertiary hidden">Modifier les paramètres</button>
 				</div>
 			</div>
 
@@ -424,7 +424,7 @@
 			</div>
 		</main>
 
-		<footer><p>Made by Regen Aloy [Maduin/Zalera] 2022 &copy; SQUARE ENIX CO., LTD. All Rights Reserved.</p></footer>
+		<footer><p>Créé par Regen Aloy [Maduin/Zalera], traduit par Hisa Kiyo [Chaos/Cerberus] 2024 &copy; SQUARE ENIX CO., LTD. All Rights Reserved.</p></footer>
 
 		<script src="js/main.min.js"></script>
 	</body>

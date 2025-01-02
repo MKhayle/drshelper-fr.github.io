@@ -31,10 +31,10 @@ class Vivi {
   win() {
     hide('vivi-south');
     show('vivi-win');
-    updateStatus('You resolved everything correctly and lived! Great job!');
+    updateStatus('Félicitations! Vous avez su résoudre parfaitement la mécanique et avez survécu!');
   }
 
-  dead(message = 'You failed to neutralize your temperature and got KO’d&nbsp;:(') {
+  dead(message = 'Votre température est restée instable et vous êtes tombé·e KO’d&nbsp;:(') {
     hide('vivi-south');
     show('vivi-dead');
     removeOptions();
@@ -51,7 +51,7 @@ class Vivi {
         y = this.y;
 
     if (ARENA[`hits${phase}`][y][x] > 1) {
-      this.dead('You got hit by two swords at once!');
+      this.dead('Vous avez été touché·e par deux épées à la fois!');
       this.bodyTemp = 100;
     }
     else
@@ -64,9 +64,9 @@ class Vivi {
     if (newBody > 2 || newBody < -2) {
       this.bodyTemp = newBody;
       if (newBody > 2)
-        this.dead('Your body temperature went above 2 levels and burned to death!');
+        this.dead('Votre température corporelle est devenue bien trop élevée et vous avez brûlé vif !');
       else
-        this.dead('Your body temperature went below 2 levels and froze to death!');
+        this.dead('Votre température corporelle est devenue bien trop faible et vous avez fini surgelé !');
     } else {
       this.showLife(newBody);
       this.bodyTemp = newBody;
@@ -326,7 +326,7 @@ function startPractice() {
       VIVI.showLife(VIVI.bodyTemp);
     }
     else {
-      startMechanic('Hot and Cold');
+      startMechanic('Chaud et froid');
     }
   } else {
     SPEED = 1000;
@@ -409,7 +409,7 @@ function startTimerHotCold() {
         ARENA.colorTiles(2);
         break;
       case 17:
-        startMechanic('Blade of Entropy', 10);
+        startMechanic('Sabre du feu et de la glace', 10);
         ARENA.showSwords(2);
         break;
       case 18:
@@ -422,17 +422,17 @@ function startTimerHotCold() {
         ARENA.colorTiles(1);
         break;
       case 30:
-        startMechanic('Blade of Entropy', 10);
+        startMechanic('Sabre du feu et de la glace', 10);
         ARENA.showSwords(1);
         break;
       case 31:
         ARENA.rotateBosses(1);
         break;
       case 38:
-        startMechanic('Unwavering Apparition');
+        startMechanic('Spectres du chevalier implacable');
         break;
       case 46:
-        startMechanic('Elemental Brand');
+        startMechanic('Malédiction du feu et de la glace');
         break;
     }
   }, SPEED);
@@ -462,25 +462,25 @@ function startTimerBrand() {
 }
 
 function startMechanic(mechanic, time = 4) {
-  let cast = `Casting <b>${mechanic}</b> in... `;
+  let cast = `Va incanter <b>${mechanic}</b> dans... `;
 
   updateStatus(cast + time);
   timerMECHANIC = setInterval(function() {
     time--;
     if (time <= 0) {
       switch(mechanic) {
-        case 'Blade of Entropy':
+        case 'Sabre du feu et de la glace':
           ARENA.hideSwords();
           break;
-        case 'Unwavering Apparition':
+        case 'Spectres du chevalier implacable':
           ARENA.showClones();
           updateStatus();
           break;
-        case 'Elemental Brand':
+        case 'Malédiction du feu et de la glace':
           startTimerBrand();
           updateStatus();
           break;
-        case 'Hot and Cold':
+        case 'Chaud et froid':
           startTimerHotCold();
           show('dbf-intemp');
           VIVI.showLife(VIVI.bodyTemp);
@@ -555,10 +555,10 @@ function write(element, text = '&nbsp;') {
 function writeTempChange(temp) {
   let text, change, plural;
   if (temp !== 0) {
-    change = (temp < 0) ? 'falls' : 'rises';
+    change = (temp < 0) ? 'a chuté de' : 'a augmenté de';
     temp = Math.abs(temp);
-    plural = (temp > 1) ? 's' : '';  
-    text = `<i>Your body temperature ${change} ${temp} level${plural}.</i>`;
+    plural = (temp > 1) ? 'x' : '';  
+    text = `<i>Votre température corporelle ${change} ${temp} niveau${plural}.</i>`;
   }
   updateStatus(text);
 }
